@@ -12,54 +12,6 @@ const int maxn = 1e6;
 
 set<int> primes;
 
-class Num {
- public:
-  // 逆序存储每一位
-  vector<int> values;
-  int value;
-  Num(int num) {
-    value = num;
-    for (int i = 0; i < 6; ++i) {
-      values.push_back(num % 10);
-      num /= 10;
-    }
-  }
-
-  Num(vector<int> values) : values(values) {
-    value = 0;
-    for (int i = 0; i < 6; ++i) {
-      value += values[i] * pow(10, i);
-    }
-  }
-
-  inline bool operator<(const Num &num) { return value < num.value; }
-
-  vector<Num> adj() {
-    vector<Num> ret;
-    int a = values[5], b = values[4], c = values[3], d = values[2],
-        e = values[1], f = values[0];
-    // cout << "a = " << a << " b = " << b << " c = " << c << " d = " << d << "
-    // e = " << e << endl;
-    if (0 <= a - 1) ret.push_back(Num({f, e, d, c, b, a - 1}));
-    if (0 <= b - 1) ret.push_back(Num({f, e, d, c, b - 1, a}));
-    if (0 <= c - 1) ret.push_back(Num({f, e, d, c - 1, b, a}));
-    if (0 <= d - 1) ret.push_back(Num({f, e, d - 1, c, b, a}));
-    if (0 <= e - 1) ret.push_back(Num({f, e - 1, d, c, b, a}));
-    if (0 <= f - 1) ret.push_back(Num({f - 1, e, d, c, b, a}));
-    if (f + 1 <= 9) ret.push_back(Num({f + 1, e, d, c, b, a}));
-    if (e + 1 <= 9) ret.push_back(Num({f, e + 1, d, c, b, a}));
-    if (d + 1 <= 9) ret.push_back(Num({f, e, d + 1, c, b, a}));
-    if (c + 1 <= 9) ret.push_back(Num({f, e, d, c + 1, b, a}));
-    if (b + 1 <= 9) ret.push_back(Num({f, e, d, c, b + 1, a}));
-    if (a + 1 <= 9) ret.push_back(Num({f, e, d, c, b, a + 1}));
-    // for (auto num : ret) {
-    //   cout << num.value << ' ';
-    // }
-    // cout << endl << endl;
-    return ret;
-  }
-};
-
 bool isPrime(int num) {
   for (int i = 2; i * i <= num; ++i) {
     if (num % i == 0) {
@@ -81,30 +33,54 @@ int distance(int a, int b) {
   return ret;
 }
 
-int bfs(deque<Num> &curs, set<int> &st) {
-  int n = curs.size();
-  for (int i = 0; i < n; ++i) {
-    Num cur = curs.front();
-    // cout << cur.value << ' ';
-    if (isP(cur.value)) return cur.value;
-    curs.pop_front();
-    vector<Num> nexts = cur.adj();
-    for (auto &next : nexts) {
-      if (st.count(next.value)) continue;
-      curs.push_back(next);
-      st.insert(next.value);
+vector<int> adj(int num) {
+  vector<int> values;  // 逆序存储
+  for (int i = 0; i < 6; ++i) {
+    values.push_back(num % 10);
+    num /= 10;
+  }
+  vector<int> ret;
+  for (int i = 0; i < 6; ++i) {
+    int copys[3];
+    copys[0] = values[i];
+    copys[1] = values[i] - 1;
+    copys[2] = values[i] + 1;
+    for (int j = 1; j <= 2; ++j) {
+      if (0 <= copys[j] && copys[j] <= 9) {
+        values[i] = copys[j];
+        int next = 0;
+        int weight = 1;
+        for (int k = 0; k < 6; ++k) {
+          next += weight * values[k];
+          weight *= 10;
+        }
+        ret.push_back(next);
+      }
+    }
+
+    values[i] = copys[0];
+  }
+  return ret;
+}
+
+
+int bfs(priority_queue<int, vector<int>, greater<int>> curs, set<int> &st) {
+  priority_queue<int, vector<int>, greater<int>> nexts;
+  while (curs.size()) {
+    int cur = curs.top();
+    curs.pop();
+    if (isP(cur)) return cur;
+    vector<int> nums = adj(cur);
+    for (auto &num : nums) {
+      if (st.count(num)) continue;
+      nexts.push(num);
+      st.insert(num);
     }
   }
-  sort(curs.begin(), curs.end());
-  // for (auto &num : curs) {
-  //   cout << num.value << ' ';
-  // }
-  // cout << endl << endl;
-  return bfs(curs, st);
+  return bfs(nexts, st);
 }
 
 int main() {
-  // cout << "num = " << num.value << endl;
   for (int i = 2; i <= maxn; ++i) {
     if (isPrime(i)) {
       primes.insert(i);
@@ -125,8 +101,11 @@ int main() {
       continue;
     }
 
-    deque<Num> curs;
-    curs.push_back(Num(num));
+    if (num == 1000000) return 2;
+
+    // deque<Num> curs;
+    priority_queue<int, vector<int>, greater<int>> curs;
+    curs.push(num);
     set<int> st;
     st.insert(num);
     int ans = bfs(curs, st);
