@@ -20,9 +20,9 @@ int main() {
     else if (ch == 'i')
       pois.push_back((pos.back() + pois.back()) % mod);
     else if (ch == '*') {
-      ps.push_back((pCnt * 3 % mod + 1) % mod);
-      pos.push_back((poCnt * 3 % mod + pCnt) % mod);
-      pois.push_back((poiCnt * 3 % mod + poCnt) % mod);
+      ps.push_back((pCnt * 3 + 1) % mod);
+      pos.push_back((poCnt * 3 + pCnt) % mod);
+      pois.push_back((poiCnt * 3 + poCnt) % mod);
     }
   }
   cout << pois.back() << endl;
