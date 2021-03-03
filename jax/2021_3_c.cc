@@ -2,30 +2,32 @@
 #include <vector>
 using namespace std;
 
+using ll = long long;
+
 const int mod = 1e9 + 7;
 
 int main() {
-  int n;
+  ll n;
   cin >> n;
   string s;
   cin >> s;
-  vector<int> ps{0}, pos{0}, pois{0};
+  ll ps = 0, pos = 0, pois = 0;
+  ll cnt = 1;
   for (auto &ch : s) {
-    int pCnt = ps.back(), poCnt = pos.back(), poiCnt = pois.back();
-    ps.push_back(ps.back());
-    pos.push_back(pos.back());
-    pois.push_back(pois.back());
+    // 记录前一个前缀和
+    ll pCnt = ps, poCnt = pos, poiCnt = pois;
     if (ch == 'p')
-      ps.back() = (ps.back() + 1) % mod;
+      ps = (ps + cnt) % mod;
     else if (ch == 'o')
-      pos.back() = (pos.back() + ps.back()) % mod;
+      pos = (pos + ps) % mod;
     else if (ch == 'i')
-      pois.back() = (pos.back() + pois.back()) % mod;
+      pois = (pois + pos) % mod;
     else if (ch == '*') {
-      ps.back() = (pCnt * 3 % mod + 1) % mod;
-      pos.back() = (poCnt * 3 % mod + pCnt) % mod;
-      pois.back() = (poiCnt * 3 % mod + poCnt) % mod;
+      ps = (pCnt * 3 % mod + cnt) % mod;
+      pos = (poCnt * 3 % mod + pCnt) % mod;
+      pois = (poiCnt * 3 % mod + poCnt) % mod;
+      cnt = cnt * 3 % mod;
     }
   }
-  cout << pois.back() << endl;
+  cout << pois << endl;
 }
