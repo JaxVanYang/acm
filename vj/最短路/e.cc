@@ -1,70 +1,93 @@
-/*
- * @Descripttion: 
- * @Author: cyj
- * @Date: 2021-03-05 14:34:36
- * @LastEditTime: 2021-03-05 14:36:42
- */
-
 #include <iostream>
-#include <cstring>
 #include <cstdio>
+#include <cstring>
 #include <cmath>
-#define x first
-#define y second
+#include <queue>
+#include <algorithm>
 
 using namespace std;
 
-typedef pair<int, int> PII;
+const int N = 5205, INF = 0x3f3f3f3f;
 
-const int N = 205;
-PII p[N];
-double  g[N][N];
-double dist[N];
-bool st[N];
-int n;
+int cnt, dist[N], Head[N], num[N], vis[N];
+int n, m, w;
 
-double get_d(int i, int j){
-    return sqrt((double)(p[i].x - p[j].x) * (p[i].x - p[j].x) + (double)(p[i].y - p[j].y) * (p[i].y - p[j].y));
+struct Edge
+{
+    int v, w, next;
+}e[N];
+
+void Add(int u, int v, int w)
+{
+    e[cnt].v = v;
+    e[cnt].w = w;
+    e[cnt].next = Head[u];
+    Head[u] = cnt++;
 }
 
-void dijkstra(){
-    for (int i = 1; i <= n; i ++) dist[i] = 0x3f3f3f3f;
-    memset(st, 0, sizeof st);
+bool spfa()
+{
+    memset(vis, 0, sizeof(vis));
+    memset(num, 0, sizeof(num));
+    queue<int>Q;
+    vis[1] = 1;
     dist[1] = 0;
-    
-    for (int i = 1; i <= n; i ++){
-        int t = -1;
-        for (int j = 1; j <= n; j ++){
-            if (!st[j] && (t == -1 || dist[j] < dist[t])){
-                t = j;
+    Q.push(1);
+    num[1]++;
+    while(Q.size())
+    {
+        int p=Q.front();
+        Q.pop();
+        vis[p] = 0;
+        for(int i=Head[p]; i!=-1; i=e[i].next)
+        {
+            int q = e[i].v;
+            if(dist[q] > dist[p] + e[i].w)
+            {
+                dist[q] = dist[p] + e[i].w;
+                if(!vis[q])
+                {
+                    vis[q] = 1;
+                    Q.push(q);
+                    num[q] ++;
+                    if(num[q]>n)
+                        return true;
+                }
             }
         }
-        
-        st[t] = true;
-        for (int j = 1; j <= n ; j ++){
-            dist[j] = min(dist[j], max(dist[t], g[t][j]));
-        }
     }
+    return false;
 }
 
-int main(){
-    
-    int q = 1;
-    while (scanf("%d", &n), n){
-        for (int i = 1; i <= n; i ++){
-            scanf("%d%d", &p[i].x, &p[i].y);
+int main()
+{
+    int T, a, b, c;
+    scanf("%d", &T);
+    while(T--)
+    {
+        scanf("%d%d%d", &n, &m, &w);
+
+        cnt = 0;
+        memset(Head, -1, sizeof(Head));
+        for(int i=1; i<=n; i++)
+            dist[i] = INF;
+
+        for(int i=1; i<=m; i++)
+        {
+            scanf("%d%d%d", &a, &b, &c);
+            Add(a, b, c);
+            Add(b, a, c);
         }
-        
-        for (int i = 1; i <= n; i ++){
-            for (int j = i + 1; j <= n; j ++){
-                g[i][j] = g[j][i] = get_d(i, j);
-            }
+        for(int i=1; i<=w; i++)
+        {
+            scanf("%d%d%d", &a, &b, &c);
+            Add(a, b, -c);
         }
-        
-        dijkstra();
-        
-        printf("Scenario #%d\nFrog Distance = %.3lf\n\n", q ++, dist[2]);
+
+        if( spfa() )
+            printf("YES\n");
+        else
+            printf("NO\n");
     }
-    
     return 0;
 }
