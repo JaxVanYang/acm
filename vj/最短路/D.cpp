@@ -42,8 +42,7 @@ void dijkstra(){
         
         st[t] = true;
         for (int j = 1; j <= n ; j ++){
-            // dist[j] = min(dist[j], max(dist[t], g[t][j]));
-            dist[j] = dist[t] + g[t][j];
+            dist[j] = min(dist[j], max(dist[t], g[t][j]));
         }
     }
 }
