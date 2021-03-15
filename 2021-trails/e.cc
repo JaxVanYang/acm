@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: cyj
+ * @Date: 2021-03-14 19:29:31
+ * @LastEditTime: 2021-03-14 19:47:44
+ */
 #include <iostream>
 using namespace std;
 const int maxn = 50005;
@@ -12,8 +18,10 @@ void build(int p, int l, int r) {
     t[p].l = l, t[p].r = r;
     if (l == r) {
         t[p].cnt = a[l];
+        t[p].mark = -1;
         return;
     }
+    t[p].mark = -1;
     int mid = (l + r) / 2;
     build(p * 2, l, mid);
     build(p * 2 + 1, mid + 1, r);
@@ -80,6 +88,8 @@ int main() {
         int op, l, r;
         scanf("%d%d%d", &op, &l, &r);
         change(1, l, r, op);
+        for (int i = 1; i <= n * 4; i ++) cout << t[i].cnt << " ";
+        cout << endl;
     }
     for (int i = 1; i <= n; ++i) printf("%d ", ask(1, i, i));
 }
