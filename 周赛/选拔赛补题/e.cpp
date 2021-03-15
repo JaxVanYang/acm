@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: cyj
  * @Date: 2021-03-14 11:29:04
- * @LastEditTime: 2021-03-15 17:21:03
+ * @LastEditTime: 2021-03-15 17:51:21
  */
 
 #include <iostream>
@@ -33,7 +33,7 @@ void pushdown(int u){
         // cout << "mmm " << endl;
         left.st = right.st = root.st;
         left.sum = (left.r - left.l + 1) * root.st;
-        right.sum = (right.r - left.l + 1) * root.st;
+        right.sum = (right.r - right.l + 1) * root.st;
         root.st = -1;
     }
 }
