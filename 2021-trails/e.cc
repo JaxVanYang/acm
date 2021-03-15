@@ -1,95 +1,81 @@
-/*
- * @Descripttion: 
- * @Author: cyj
- * @Date: 2021-03-14 19:29:31
- * @LastEditTime: 2021-03-14 19:47:44
- */
 #include <iostream>
 using namespace std;
-const int maxn = 50005;
-bool a[maxn];
 
+const int maxn = 5e4 + 5;
+
+int n, m;
 struct Tree {
-    int l, r, cnt;
-    int mark = -1;  // -1 表示无需更新，0 表示升序，1 表示降序
+  int l, r;
+  int cnt;
+  int mark = -1;
 } t[maxn * 4];
 
-void build(int p, int l, int r) {
-    t[p].l = l, t[p].r = r;
-    if (l == r) {
-        t[p].cnt = a[l];
-        t[p].mark = -1;
-        return;
-    }
-    t[p].mark = -1;
-    int mid = (l + r) / 2;
-    build(p * 2, l, mid);
-    build(p * 2 + 1, mid + 1, r);
-    t[p].cnt = t[p * 2].cnt + t[p * 2 + 1].cnt;
+int a[maxn];
+
+void pushup(int u) { t[u].cnt = t[u << 1].cnt + t[u << 1 | 1].cnt; }
+
+void pushdown(int u) {
+  if (t[u].mark == -1) return;
+  Tree &root = t[u], &left = t[u << 1], &right = t[u << 1 | 1];
+  left.mark = right.mark = root.mark;
+  left.cnt = (left.r - left.l + 1) * root.mark;
+  right.cnt = (right.r - right.l + 1) * root.mark;
+  root.mark = -1;
 }
 
-void spread(int p) {
-    if (~t[p].mark) {
-        int lCnt = t[p * 2].cnt, rCnt = t[p * 2 + 1].cnt;
-        int lRange = t[p * 2].r - t[p * 2].l + 1, rRange = t[p * 2 + 1].r - t[p * 2 + 1].l + 1;
-        if (t[p].mark) {    // 降序，要把 1 都放在左边
-            if (lCnt + rCnt <= lRange) {
-                t[p * 2].cnt = lCnt + rCnt;
-                t[p * 2 + 1].cnt = 0;
-            } else {
-                t[p * 2].cnt = lRange;
-                t[p * 2 + 1].cnt = lCnt + rCnt - lRange;
-            }
-        } else {
-            if (lCnt + rCnt <= rRange) {
-                t[p * 2 + 1].cnt = lCnt + rCnt;
-                t[p * 2].cnt = 0;
-            } else {
-                t[p * 2 + 1].cnt = rRange;
-                t[p * 2].cnt = lCnt + rCnt - rRange;
-            }
-        }
-        t[p * 2].mark = t[p].mark;
-        t[p * 2 + 1].mark = t[p].mark;
-        t[p].mark = -1;
-    }
+void build(int u, int l, int r) {
+  //   t[u].mark = -1;
+  t[u].l = l, t[u].r = r;
+  if (l == r) {
+    t[u].cnt = a[l];
+  } else {
+    int mid = l + r >> 1;
+    build(u << 1, l, mid), build(u << 1 | 1, mid + 1, r);
+    pushup(u);
+  }
 }
 
-void change(int p, int l, int r, int mark) {
-    if (l <= t[p].l && t[p].r <= r) {
-        t[p].mark = mark;
-        return;
-    }
-    spread(p);  // 先处理之前的标记
-    int mid = (t[p].l + t[p].r) / 2;
-    // 再更新子结点
-    if (l <= mid) change(p * 2, l, r, mark);
-    if (mid < r) change(p * 2 + 1, l, r, mark);
-    // 再通过子结点更新当前结点
-    t[p].cnt = t[p * 2].cnt + t[p * 2 + 1].cnt;
+void modify(int u, int l, int r, int v) {
+  if (l <= t[u].l && t[u].r <= r) {
+    t[u].cnt = (t[u].r - t[u].l + 1) * v;
+    t[u].mark = v;
+  } else {
+    pushdown(u);
+    int mid = t[u].l + t[u].r >> 1;
+    if (l <= mid) modify(u << 1, l, r, v);
+    if (r > mid) modify(u << 1 | 1, l, r, v);
+    pushup(u);
+  }
 }
 
-int ask(int p, int l, int r) {
-    if (l <= t[p].l && t[p].r <= r) return t[p].cnt;
-    spread(p);
-    int mid = (t[p].l + t[p].r) / 2;
-    int ret = 0;
-    if (l <= mid) ret += ask(p * 2, l, r);
-    if (mid < r) ret += ask(p * 2 + 1, l , r);
-    return ret;
+int query(int u, int l, int r) {
+  if (t[u].l >= l && t[u].r <= r) {
+    return t[u].cnt;
+  } else {
+    pushdown(u);
+    int res = 0;
+    int mid = t[u].l + t[u].r >> 1;
+    if (l <= mid) res += query(u << 1, l, r);
+    if (r > mid) res += query(u << 1 | 1, l, r);
+    return res;
+  }
 }
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    for (int i = 1; i <= n; ++i) scanf("%d", a + i);
-    build(1, 1, n);
-    while (m--) {
-        int op, l, r;
-        scanf("%d%d%d", &op, &l, &r);
-        change(1, l, r, op);
-        for (int i = 1; i <= n * 4; i ++) cout << t[i].cnt << " ";
-        cout << endl;
+  scanf("%d%d", &n, &m);
+  for (int i = 1; i <= n; i++) scanf("%d", &a[i]);
+  build(1, 1, n);
+  for (int i = 0; i < m; i++) {
+    int a, b, c;
+    scanf("%d%d%d", &a, &b, &c);
+    int num = query(1, b, c);
+    if (a) {
+      modify(1, b, b + num - 1, 1), modify(1, b + num, c, 0);
+    } else {
+      modify(1, b, c - num, 0), modify(1, c - num + 1, c, 1);
     }
-    for (int i = 1; i <= n; ++i) printf("%d ", ask(1, i, i));
+  }
+  for (int i = 1; i <= n; i++) printf("%d ", query(1, i, i));
+
+  return 0;
 }
