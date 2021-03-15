@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: cyj
  * @Date: 2021-03-14 11:29:04
- * @LastEditTime: 2021-03-15 17:51:21
+ * @LastEditTime: 2021-03-15 17:53:02
  */
 
 #include <iostream>
@@ -16,7 +16,8 @@ const int N = 5e4 + 5;
 int n, m;
 struct node{
     int l, r;
-    int sum, st = - 1;
+    int sum;
+    int st = - 1;
 }t[N*4];
 
 int w[N];
@@ -28,9 +29,6 @@ void pushup(int u){
 void pushdown(int u){
     node &root = t[u], &left = t[u<<1], &right = t[u<<1|1];
     if (root.st != -1){
-        // cout << "l " << root.l << " r " << root.r << endl;
-        // cout << "st " << root.st << endl;
-        // cout << "mmm " << endl;
         left.st = right.st = root.st;
         left.sum = (left.r - left.l + 1) * root.st;
         right.sum = (right.r - right.l + 1) * root.st;
@@ -45,7 +43,7 @@ void build(int u, int l, int r){
         t[u].sum = w[l];
     }
     else {
-        t[u] = {l, r};
+        t[u].l = l, t[u].r = r;
         int mid = l + r >> 1;
         build(u<<1, l, mid), build(u<<1|1, mid + 1, r);
         pushup(u);
@@ -57,8 +55,7 @@ void modify(int u, int l, int r, int v){
         // cout << "u " << u << " sum[u] " << t[u].sum << endl;
         t[u].sum = (t[u].r - t[u].l + 1) * v;
         t[u].st = v;
-    }
-    else {
+    } else {
         pushdown(u);
         int mid = t[u].l + t[u].r >> 1;
         if (l <= mid) modify(u<<1, l, r, v);
@@ -69,8 +66,8 @@ void modify(int u, int l, int r, int v){
 
 int query(int u, int l, int r){
     if (t[u].l >= l && t[u].r <= r){
-        cout << "u " << u << " ";
-        cout << t[u].sum << endl;
+        // cout << "u " << u << " ";
+        // cout << t[u].sum << endl;
         return t[u].sum;
     }
     else {
@@ -89,8 +86,7 @@ int main(){
     scanf("%d%d", &n, &m);
     for (int i = 1; i <= n; i ++) scanf("%d", &w[i]);
     build(1, 1, n);
-    for (int i = 1; i <= 4 * n; i ++) cout << t[i].sum << " ";
-    cout << endl;
+    // cout << endl;
     // cout << query(1, 1, n) << endl;
     for (int i = 0; i < m ; i ++){
         int a, b, c;
@@ -102,10 +98,14 @@ int main(){
         }else {
             modify(1, b, c - num, 0), modify(1, c - num + 1, c, 1);
         }
-        cout << "Case " << i + 1 << " sum[7] "<< t[7].sum << endl;
+        // cout << "Case " << i + 1 << " sum[7] "<< t[7].sum << endl;
     }
-    cout << query(1, 5, 5) << endl;
+    // cout << query(1, 5, 5) << endl;
     for (int i = 1; i <= n; i ++) printf("%d ", query(1, i, i));
+    // cout << endl;
+    // for (int i = 1; i <= 4 * n; i ++){
+    //     cout << "sum " << t[i].sum << " st " << t[i].st << endl;
+    // }
     
     return 0;
 }
