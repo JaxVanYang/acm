@@ -1,7 +1,9 @@
-/* 
- * @from https://vjudge.net/contest/417990#problem/D
+/*
+ * @Descripttion: 
+ * @Author: cyj
+ * @Date: 2021-03-10 21:11:07
+ * @LastEditTime: 2021-03-10 21:11:52
  */
-
 #include <iostream>
 
 const int maxn = 1e5 + 5;
