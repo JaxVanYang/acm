@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: cyj
+ * @Date: 2021-03-03 22:57:41
+ * @LastEditTime: 2021-03-03 23:07:04
+ */
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -41,7 +47,6 @@ vector<int> adj(int num) {
 }
 
 int main() {
-  // cout << "num = " << num.value << endl;
 
   vector<int> nums = adj(111111);
   for (auto num : nums) {

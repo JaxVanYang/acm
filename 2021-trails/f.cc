@@ -4,16 +4,20 @@
 using namespace std;
 using ll = long long;
 
-const int maxn = 1e6 + 7;
-char a[maxn], b[maxn], p[2 * maxn];
+const int N = 1e6 + 7;
+char a[N], b[N], p[2 * N];
 
-// 用来算字符串数字对 mod 取余的值
+
 int get(char s[], int len, int mod) {
     int ret = 0, tmp = 1;
     for (int i = len - 1; i >= 0; --i) {
         ret = (ret + (ll)(s[i] - '0') * tmp) % mod;
         tmp = ((ll)tmp * 10) % mod;
+        // cout << tmp  << " " ;
+        // cout << ret << " ";
     }
+    // cout << endl;
+    
     return ret;
 }
 
@@ -28,8 +32,9 @@ int main() {
     int mod = 1;
     // 选取 mod 值
     for (int i = 0; i < len3 - k; ++i) {
-        mod = (ll)mod * 10 % maxn;
+        mod = (ll)mod * 10 % N;
     }
+    // cout << "mod " << mod << endl;
     for (int i = 0; i <= 9; ++i) {
         p[k] = '0' + i;
         int amod = get(a, len1, mod), bmod = get(b, len2, mod);
