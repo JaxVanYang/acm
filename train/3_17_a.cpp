@@ -5,7 +5,7 @@
  * @Status: 
  * @Author: cyj
  * @Date: 2021-03-17 19:35:47
- * @LastEditTime: 2021-03-17 19:46:55
+ * @LastEditTime: 2021-03-17 22:52:34
  */
 
 #include <iostream>
@@ -14,6 +14,7 @@ using namespace std;
 
 const int N = 110;
 int a[N];
+int n;
 
 int main(){
 
