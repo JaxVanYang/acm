@@ -25,6 +25,8 @@ Just do what you want, if you can.
 - [book-problem](./book-problem)（《算法竞赛进阶指南》题目代码）  
 
 - [jax](./jax)（[Jax]（https://jaxvanyang.github.io) 的代码）  
+    该目录下的文件夹以日期命名，表示存放的是哪一天的代码  
+    - [21-03-21](./jax/21-03-21)
 
 - [resource](./resource)（一些资源文件）  
 
