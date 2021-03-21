@@ -32,6 +32,8 @@ Just do what you want, if you can.
 
 - [cyj](./cyj) （cyj的刷题代码）
 
+- [lqw](./lqw)  (lqw的试题代码)
+
 ## Git 的基本使用
 Git 是一个用于版本控制的命令行工具，可以很方便地备份和恢复各个时间节点的代码，再加上 GitHub，在不同设备上的同步也变得简单便捷。  
 
