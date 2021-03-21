@@ -33,7 +33,9 @@ Just do what you want, if you can.
 - [cyj](./cyj) （cyj的刷题代码）
 
 ## Git 的基本使用
-Git 是一个用于版本控制的命令行工具，可以很方便地备份和恢复各个时间节点的代码，再加上 GitHub，在不同设备上的同步也变得简单便捷。
+Git 是一个用于版本控制的命令行工具，可以很方便地备份和恢复各个时间节点的代码，再加上 GitHub，在不同设备上的同步也变得简单便捷。  
+
+> ！注意，这里的所说的基本使用真的十分基本，甚至你看完后依然会碰到一堆问题，建议在使用过程中熟练运用搜索引擎，如果发现本文有任何失误或一些基本操作没有设计，欢迎纠正和丰富本文内容，这也可以当作使用 Git 的练习。BTW，《Pro Git》是相当好的一本介绍 Git 的书，推荐阅读：<https://gitee.com/progit/>  
 
 ### Git 的安装
 Windows 到官网下载无脑下一步。
@@ -91,6 +93,14 @@ Windows 到官网下载无脑下一步。
     no changes added to commit (use "git add" and/or "git commit -a")   # 提示你没有修改被暂存
     ```
 
+5. 暂存文件  
+    前面 `git status` 给出的信息已经提示了如何暂存，这里主要就讲一下几个比较方便的变体：  
+    ```bash
+    git add .   # 暂存当前目录下的所有文件，单独一个 . 代表当前目录
+    git add *.cpp   # 暂存当前目录下的所有以 .cpp 结尾的文件，* 表示通配符，可以匹配任意长度任意字符
+    git add -A  # 暂存所有文件，不仅仅是当前文件夹下，-A 表示 All
+    ```
+
 5. 提交  
     假设你已经知道了文件暂存是什么意思了，那么提交就是将暂存的文件保存到版本库中。  
     ```bash
@@ -124,4 +134,14 @@ Windows 到官网下载无脑下一步。
         3. 现在使用 `git push` 查看是否成功：  
             ```bash
             git push
+            # 以下是成功信息
+            Enumerating objects: 9, done.
+            Counting objects: 100% (9/9), done.    
+            Delta compression using up to 8 threads
+            Compressing objects: 100% (6/6), done. 
+            Writing objects: 100% (6/6), 43.55 KiB | 3.11 MiB/s, done.
+            Total 6 (delta 1), reused 0 (delta 0), pack-reused 0      
+            remote: Powered by GITEE.COM [GNK-5.0]
+            To gitee.com:chu_ying_jie/acm.git    
+            58cd1c9..d61fced  master -> master
             ```
