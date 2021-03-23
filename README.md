@@ -1,9 +1,3 @@
-<!--
- * @Descripttion: 
- * @Author: cyj
- * @Date: 2021-03-16 15:53:35
- * @LastEditTime: 2021-03-17 16:52:51
--->
 ## 这个仓库是什么？
 一言以蔽之，这是一个方便互相学习交流的算法竞赛代码仓库。  
 
@@ -18,23 +12,60 @@ Just do what you want, if you can.
 3. 为了让其他人能更快地上手，应该编写简单易懂的说明文档，可以在文件夹下放置一个 `README.md` 描述这个文件夹是干什么用的，或是在下面的仓库结构添加文件或文件描述。  
 
 ## 仓库结构
-- [2021-trails](./2021-trails)（2021 选拔赛题目代码）  
 
-- [周赛](./周赛)（寒假周赛题目代码）  
+### 概览
+```bash
+# 该概览由 'tree -L 2' 命令生成，可能不会及时更新
+.
+├── cyj
+│   ├── data-structure
+│   └── train
+├── jax
+│   ├── 21-03-21
+│   ├── 21-03-22-night
+│   ├── 21-03-23-afternoon
+│   ├── 21-03-23-night
+│   ├── 21_3_18_cf_edu
+│   └── old
+├── lqw
+│   └── hello.cpp
+├── old
+│   ├── 2021-trails
+│   ├── 周赛
+│   ├── train
+│   ├── vj
+│   └── weekly-contest
+├── README.md
+└── share
+    ├── algorithm-contest-advance-direction
+    └── resource
+        ├── 21-03-21-id.png
+        ├── 21-03-21-shotcut.png
+        └── clean.ps1
 
-- [book-problem](./book-problem)（《算法竞赛进阶指南》题目代码）  
+```
 
-- [jax](./jax)（[Jax]（https://jaxvanyang.github.io) 的代码）  
+### 解释
+普通文件不加斜杠，例如：`example.txt`；加斜杠表示目录，例如：`dir/`。  
+
+> 未列出所有文件或文件夹  
+
+- [cyj/](./cyj) （cyj的刷题代码）  
+
+- [jax/](./jax)（[Jax]（https://jaxvanyang.github.io) 的代码）  
     该目录下的文件夹以日期命名，表示存放的是哪一天的代码  
-    - [21-03-21](./jax/21-03-21)
+    - [21-03-21](./jax/21-03-21)  
 
-- [resource](./resource)（一些资源文件）  
+- [lqw/](./lqw)（lqw的刷题代码）  
 
-- [vj](./vj)（VJ 上刷题的代码）  
+- [old/](./old)（遗留的，大多是未经整理的代码）  
+    - [2021-trails/](./2021-trails)（2021 选拔赛题目代码）  
+    - [周赛/](./周赛)（寒假周赛题目代码）  
+    - [vj](./vj)（VJ 上刷题的代码）  
 
-- [cyj](./cyj) （cyj的刷题代码）
-
-- [lqw](./lqw)  (lqw的试题代码)
+- [share/](./share)（共享的文件或文件夹）  
+    - [algorithm-contest-advance-direction](./share/algorithm-contest-advance-direction)（《算法竞赛进阶指南》题目代码）  
+    - [resource/](./resource)（一些资源文件）  
 
 ## Git 的基本使用
 Git 是一个用于版本控制的命令行工具，可以很方便地备份和恢复各个时间节点的代码，再加上 GitHub，在不同设备上的同步也变得简单便捷。  
