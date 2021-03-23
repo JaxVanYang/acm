@@ -2,4 +2,4 @@
 *.out
 tmp.*
 .vscode
-tempCodeRunnerFile.cc
+tempCodeRunnerFile.*
