@@ -11,6 +11,11 @@ Just do what you want, if you can.
 
 3. 为了让其他人能更快地上手，应该编写简单易懂的说明文档，可以在文件夹下放置一个 `README.md` 描述这个文件夹是干什么用的，或是在下面的仓库结构添加文件或文件描述。  
 
+## OJ 题目代码简写
+1. acw：[ACWing](https://www.acwing.com/) 上的题目代码，例如：`acw99.cc` 表示 ACWing 上的第 99 题。  
+2. ch：[Contest Hunter](http://noi-test.zzstep.com/) 上的题目代码，例如：`ch0101.cc`。  
+3. cf：[CodeForces](https://codeforces.com/)。  
+
 ## 仓库结构
 
 ### 概览
