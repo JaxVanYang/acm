@@ -11,6 +11,8 @@ int main() {
     else if ((n & 1) == 0) {
         ans = n / 2;
     }
-    // cout << "n = " << n << endl;
     cout << ans << endl;
 }
+/* 
+ * 分奇偶讨论，注意为 1 的情况
+ */

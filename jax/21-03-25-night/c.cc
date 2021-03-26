@@ -14,6 +14,7 @@ int main() {
         if (i == len) break;
         int cnt = 0;
         while (i < len && s[i] == 'x') ++cnt, ++i;
+        // 需要注意连续次数不超过 2 就不用加
         if (cnt > 2) ans += cnt - 2;
     }
     cout << ans << endl;

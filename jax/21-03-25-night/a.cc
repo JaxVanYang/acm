@@ -8,68 +8,39 @@ char m[2][maxn];
 int main() {
     int n, k;
     cin >> n >> k;
-    int p = 2 * (n - 2) - k;
+
     printf("YES\n");
-    for (int i = 0; i < n; ++i) putchar('.');
-    putchar('\n');
-    int tmp = n - 2;
+    auto line = [&]() {
+        for (int i = 0; i < n; ++i) putchar('.');
+        putchar('\n');
+    };
+    line();
 
-    if (k == 2 * tmp) {
-        memset(m, '#', sizeof(m));
-    } else {
-        if (k & 1) {
-            m[1][0] == '#';
-        }
-    }
+    char mid1 = '.', mid2 = '.';
+    int h1, h2;
+    int tot = (n - 2) * 2;
+    if (k == tot) { mid1 = mid2 = '#'; k -= 2; }
+    else if (k & 1) mid1 = '#', k -= 1;
+    if (k <= n - 3) h1 = k / 2, h2 = 0;
+    else h1 = (n - 3) / 2, h2 = (k - n + 3) / 2;
+    int half = (n - 3) / 2;
 
-    // if (k == 0) memset(m, '.', sizeof(m));
-    // else {
-    //     memset(m, '#', sizeof(m));
-    //     int left = n - 2 - k;
-    //     if (left & 1) m[1][tmp / 2] = '.', --left;
-    //     if (left < tmp) for (int i = 0; i < left / 2; ++i) {
-    //         m[0][i] = m[0][tmp - 1 - i] = '.';
-    //     } else {
-    //         for (int i = 0; i < tmp; ++i) m[0][i] = '.';
-    //         left -= tmp;
-    //         for (int i = 0; i < left / 2; ++i) m[1][i] = m[1][tmp - 1 - i] = '.';
-    //     }
-    // }
-
-    // int size;
-    // if (k >= n - 2) {
-    //     if (k & 1) {
-    //         size = n - 2;
-    //         k -= n - 2;
-    //     } else {
-    //         size = n - 2 - 1;
-    //         k -= n - 2 - 1;
-    //     }
-    // } else {
-    //     if (k & 1) 
-    // }
-
-    // putchar('.');
-    // int size = min(n - 2, k);
-    // for (int i = 0; i < size; ++i) putchar('#');
-    // for (int i = 0; i < n - 2 - size; ++i) putchar('.');
-    // cout << "." << endl;
-    
-    // putchar('.');
-    // if (k > n - 2) size = k - n + 2;
-    // else size = 0;
-    // for (int i = 0; i < size; ++i) putchar('#');
-    // for (int i = 0; i < n - 2 - size; ++i) putchar('.');
-    // cout << "." << endl;
-
-    for (int i = 0; i < 2; ++i) {
+    auto hotel = [&](int h, char mid) {
         putchar('.');
-        for (int j = 0; j < tmp; ++j) printf("%c", m[i][j]);
+        for (int i = 0; i < h; ++i) putchar('#');
+        for (int i = 0; i < half - h; ++i) putchar('.');
+        putchar(mid);
+        for (int i = 0; i < half - h; ++i) putchar('.');
+        for (int i = 0; i < h; ++i) putchar('#');
         printf(".\n");
-    }
+    };
 
+    hotel(h1, mid1);
+    hotel(h2, mid2);
 
-    for (int i = 0; i < n; ++i) putchar('.');
-    putchar('\n');
-
+    line();
+    int tmp = n - 2;
 }
+/* 
+ * 可以通过对称性来解决
+ */

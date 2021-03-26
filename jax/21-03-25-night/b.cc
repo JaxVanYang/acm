@@ -6,7 +6,6 @@ int main() {
     int n;
     cin >> n;
     int a[55], b[55];
-    // cout << "yes" << endl;
     for (int i = 0; i < n; ++i) scanf("%d", a + i);
     int r = n - 1, l = n - 1;
     for (; l >= 0; --l) {
@@ -15,8 +14,10 @@ int main() {
             a[r] = a[l];
             r--;
         }
-        // cout << "no" << endl;
     }
     cout << n - 1 - r << endl;
     for (int i = r + 1; i < n; ++i) cout << a[i] << ' ';
 }
+/* 
+ * 双指针轻松解决
+ */
