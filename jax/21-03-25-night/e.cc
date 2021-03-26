@@ -18,33 +18,11 @@ int main() {
             cnts[s[j]]++;
             ans[i] = max(ans[i], cnts[s[j]]);
         }
-
-        // for (int j = 'a'; j <= 'z'; ++j) {
-        //     cnts[j] += n;
-        //     if (cnts[j] > len) {
-        //         cnts[j] %= len;
-        //         if (cnts[j] % 2 == 1) cnts[j] = len - 1;
-        //         else cnts[j] = len;
-        //     }
-        //     ans[i] = max(ans[i], cnts[j]);
-        // }
-        // for (int j = 'A'; j <= 'Z'; ++j) {
-        //     cnts[j] += n;
-        //     if (cnts[j] > len) {
-        //         cnts[j] %= len;
-        //         if (cnts[j] % 2 == 1) cnts[j] = len - 1;
-        //         else cnts[j] = len;
-        //     }
-        //     ans[i] = max(ans[i], cnts[j]);
-        // }
-        // cout << "i = " << i << " ans = " << ans[i] << endl;
     }
-    // cout << "len = " << len << endl;
     for (int i = 0; i < 3; ++i) {
-        if (ans[i] + n <= len) ans[i] += n;
-        else if (n == 1) ans[i]--;
+        if (ans[i] + n <= len) ans[i] += n; // 总有办法构造出来
+        else if (n == 1) ans[i]--;  // 注意 n 为 1 的情况
         else ans[i] = len;
-        // cout << "i = " << i << " " << ans[i] << endl;
     }
     if (ans[0] > ans[1] && ans[0] > ans[2]) {
         printf("Kuro");

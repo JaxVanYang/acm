@@ -43,6 +43,7 @@ Just do what you want, if you can.
 ├── README.md
 └── share
     ├── algorithm-contest-advance-direction
+    ├── 0x00-basic
     └── resource
         ├── 21-03-21-id.png
         ├── 21-03-21-shotcut.png
@@ -70,6 +71,7 @@ Just do what you want, if you can.
 
 - [share/](./share)（共享的文件或文件夹）  
     - [algorithm-contest-advance-direction](./share/algorithm-contest-advance-direction)（《算法竞赛进阶指南》题目代码）  
+        -[0x00-basic](./share/algorithm-contest-advance-direction/0x00-basic/)（第一章基本算法）  
     - [resource/](./resource)（一些资源文件）  
 
 ## Git 的基本使用
