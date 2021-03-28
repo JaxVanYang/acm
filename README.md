@@ -187,3 +187,12 @@ Windows 到官网下载无脑下一步。
             To gitee.com:chu_ying_jie/acm.git    
             58cd1c9..d61fced  master -> master
             ```
+
+### Git 的使用技巧
+1. 使用别名简化使用，例如：  
+    ```bash
+    # 设置 git info 为 'git log --pretty=format:"%h - %an, %ar : %s" --graph' 这一长串命令的别名
+    git config --global alias.info 'log --pretty=format:"%h - %an, %ar : %s" --graph'
+    # 设置好后就可以直接使用查看格式化的 git 日志
+    git info
+    ```
