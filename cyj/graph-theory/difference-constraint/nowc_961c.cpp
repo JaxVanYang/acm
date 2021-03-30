@@ -5,7 +5,7 @@
  * @Status: 
  * @Author: cyj
  * @Date: 2021-03-24 16:01:53
- * @LastEditTime: 2021-03-24 16:09:16
+ * @LastEditTime: 2021-03-24 16:32:49
  */
 
 #include <iostream>
@@ -31,12 +31,13 @@ void add(int a, int b, int c){
 bool spfa(){
     memset(dist, -0x3f, sizeof dist);
     dist[0] = 0;
-    int hh = 0, tt = 0;
-    q[tt ++] = 0;
+    // int hh = 0, tt = 0;
+    int tt = 0;
+    q[++ tt] = 0;
     st[0] = true;
-    while (hh != tt){
-        int t = q[hh ++];
-        if (hh == N) hh = 0;
+    while (tt){
+        int t = q[tt --];
+        // if (hh == N) hh = 0;
         st[t] = false;
         for (int i = h[t]; ~i; i = ne[i]){
             int j = e[i];
@@ -45,9 +46,9 @@ bool spfa(){
                 cnt[j] = cnt[t] + 1;
                 if (cnt[j] >= n + 1) return true;
                 if (!st[j]){
-                    q[tt ++] = j;
-                    if (tt == N) tt = 0;
-                    st[t] = true;
+                    q[++ tt] = j;
+                    // if (tt == N) tt = 0;
+                    st[j] = true;
                 }
             }
         }
@@ -73,8 +74,8 @@ int main(){
     if (spfa()) puts("-1");
     else {
         LL res = 0;
-        for (int i = 1; i <= n; i ++) res += dist[i], cout << dist[i] << " ";
-//         printf("%lld\n", res);
+        for (int i = 1; i <= n; i ++) res += dist[i];
+        printf("%lld\n", res);
     }
     
     return 0;

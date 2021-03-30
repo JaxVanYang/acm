@@ -1,11 +1,11 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 可持久化trie
  * @Topic link: https://www.acwing.com/problem/content/258/
  * @Question meaning: 
  * @Status: 
  * @Author: cyj
  * @Date: 2021-03-19 14:55:45
- * @LastEditTime: 2021-03-21 10:38:08
+ * @LastEditTime: 2021-03-28 12:12:39
  */
 
 // 注意想清楚特判的处理

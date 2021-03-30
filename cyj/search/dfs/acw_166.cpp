@@ -5,7 +5,7 @@
  * @Status: 
  * @Author: cyj
  * @Date: 2021-03-23 16:58:23
- * @LastEditTime: 2021-03-23 16:59:11
+ * @LastEditTime: 2021-03-23 17:29:42
  */
 
 #include <iostream>
@@ -18,7 +18,7 @@ using namespace std;
 const int N = 9, M = 1 << N;
 
 int r[N], c[N], g[N][N];
-int map[M], ones[M];
+int map[M], ones[M]; // map存储数为2的多少次幂，ones为二级制中1的数量，即可选数
 char str[100];
 
 void init(){
