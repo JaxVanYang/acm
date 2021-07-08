@@ -8,7 +8,7 @@
  * @Status: Accepted
  * @Author: cyj
  * @Date: 2021-04-06 18:31:23
- * @LastEditTime: 2021-04-06 21:20:37
+ * @LastEditTime: 2021-06-04 21:26:22
  */
 
 #include <cstdio>
@@ -24,9 +24,9 @@ const int N = 1e5 + 10, M = 3e6 + 10;
 int n, m;
 int pr[N];
 int h[N], hs[N], e[M], ne[M], idx; // h为原图表头，hs为缩点后的表头
-int id[N], sc_cnt;
+int id[N], scc_cnt;
 int id_min[N], id_max[N]; // 存储每个强连通分量中点权的最大值与最小值
-int df[N], low[N], timestamp;
+int dfn[N], low[N], timestamp;
 bool in_stk[N];
 int stk[N], top;
 int f[N], mincost[N]; // f为dp数组，记录从1到i的收益最大值，mincost记录从1到i的点权最小值
@@ -36,25 +36,25 @@ void add(int h[], int a, int b){
 }
 
 void tarjan(int s){
-    df[s] = low[s] = ++ timestamp;
+    dfn[s] = low[s] = ++ timestamp;
     stk[++ top] = s, in_stk[s] = 1;
     for (int i = h[s]; ~i; i = ne[i]){
         int j = e[i];
-        if (!df[j]){
+        if (!dfn[j]){
             tarjan(j);
             low[s] = min(low[s], low[j]);
         }
-        else if (in_stk[j]) low[s] = min(low[s], low[j]);
+        else if (in_stk[j]) low[s] = min(low[s], dfn[j]);
     }
     
-    if (df[s] == low[s]){
+    if (dfn[s] == low[s]){
         int y;
-        sc_cnt ++;
+        scc_cnt ++;
         do {
             y = stk[top --];
-            id[y] = sc_cnt;
-            id_min[sc_cnt] = min(id_min[sc_cnt], pr[y]); 
-            id_max[sc_cnt] = max(id_max[sc_cnt], pr[y]);
+            id[y] = scc_cnt;
+            id_min[scc_cnt] = min(id_min[scc_cnt], pr[y]); 
+            id_max[scc_cnt] = max(id_max[scc_cnt], pr[y]);
             in_stk[y] = false;
         } while (y != s);
     }
@@ -75,7 +75,7 @@ int main(){
     }
     
     for (int i = 1; i <= n; i ++){
-        if (!df[i]) tarjan(i);
+        if (!dfn[i]) tarjan(i);
     }
     
     for (int i = 1; i <= n; i ++){ // 缩点，建图
@@ -87,9 +87,9 @@ int main(){
             }
         }
     }
-    f[sc_cnt] = id_max[sc_cnt] - id_min[sc_cnt]; // 为dp做初始化（f数组与mincost数组）
-    mincost[sc_cnt] = id_min[sc_cnt];
-    for (int i = sc_cnt; i; i --){
+    f[scc_cnt] = id_max[scc_cnt] - id_min[scc_cnt]; // 为dp做初始化（f数组与mincost数组）
+    mincost[scc_cnt] = id_min[scc_cnt];
+    for (int i = scc_cnt; i; i --){
         for (int j = hs[i]; ~j; j = ne[j]){
             int k = e[j];
             mincost[k] = min(mincost[i], id_min[k]);

@@ -5,7 +5,7 @@
  * @Status: Accepted
  * @Author: cyj
  * @Date: 2021-03-28 15:23:02
- * @LastEditTime: 2021-03-28 15:29:03
+ * @LastEditTime: 2021-06-02 20:55:37
  */
 
 #include <iostream>
@@ -58,7 +58,6 @@ int main(){
     }
     memcpy(d, g, sizeof d);
     for (int k = 1; k <= n; k ++){
-        
         for (int i = 1; i < k; i ++){
             for (int j = i + 1; j < k; j ++){ // i， j， k需为三个不同的点，k为环中节点编号最大的点
                 if ((LL)d[i][j] + g[i][k] + g[k][j] < ans){ // g[a][b]初始化为INF，三者相加可能爆int

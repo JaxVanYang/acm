@@ -5,7 +5,7 @@
  * @Status: 
  * @Author: cyj
  * @Date: 2021-03-19 10:08:56
- * @LastEditTime: 2021-03-19 10:09:21
+ * @LastEditTime: 2021-04-27 11:24:03
  */
 
 #include <iostream>
@@ -31,7 +31,6 @@ int get_min(char s[]){
     }
     int t = min(i, j);
     s[t + n]  = 0;
-    // cout << t << endl;
     return t;
 }
 
