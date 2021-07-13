@@ -43,10 +43,7 @@ Just do what you want, if you can.
 ├── README.md
 └── share
     ├── algorithm-contest-advance-direction
-<<<<<<< HEAD
-    ├── 0x00-basic
-=======
->>>>>>> jax
+    ├── compare
     └── resource
         ├── 21-03-21-id.png
         ├── 21-03-21-shotcut.png
