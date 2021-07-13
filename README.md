@@ -38,32 +38,38 @@ Just do what you want, if you can.
 # 该概览由 'tree -L 2' 命令生成，可能不会及时更新
 .
 ├── cyj
-│   ├── data-structure
-│   └── train
+│   ├── cf
+│   ├── data-structure
+│   ├── dynamic-programming
+│   ├── graph-theory
+│   ├── math
+│   ├── search
+│   └── train
 ├── jax
-│   ├── 21-03-21
-│   ├── 21-03-22-night
-│   ├── 21-03-23-afternoon
-│   ├── 21-03-23-night
-│   ├── 21_3_18_cf_edu
-│   └── old
+│   ├── 21-03
+│   ├── 21-04
+│   ├── 21-05
+│   ├── 21-ladder-competition-天梯赛
+│   ├── 21-summer-暑训
+│   ├── classic-经典算法
+│   ├── codeforces
+│   ├── note.md
+│   └── old
 ├── lqw
-│   └── hello.cpp
+│   └── hello.cpp
 ├── old
-│   ├── 2021-trails
-│   ├── 周赛
-│   ├── train
-│   ├── vj
-│   └── weekly-contest
+│   ├── 21-trails-集训队选拔赛
+│   ├── misc-杂项
+│   ├── train-训练
+│   ├── vj
+│   └── weekly-contest-周赛
 ├── README.md
 └── share
-    ├── algorithm-contest-advance-direction
-    ├── compare
-    └── resource
-        ├── 21-03-21-id.png
-        ├── 21-03-21-shotcut.png
-        └── clean.ps1
+    ├── algorithm-advance-算法进阶指南
+    ├── compare-对拍
+    └── resource-其他资源
 
+28 directories, 3 files
 ```
 
 ### 解释
