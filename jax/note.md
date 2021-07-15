@@ -32,8 +32,9 @@
 1. 取整
 
     浮点数到整形的强制转型是向下取整，而 `printf("%.6lf", num)` 的取整方式不确定。
-
-    原因可参考[^1]。
+    
+    
+    原因可参考[为什么(2.55).toFixed(1)等于2.5？](https://www.cnblogs.com/zhangycun/p/7880580.html)。
 
     > Solution：推荐使用 `<cmath>` 库函数 `floor()`, `round()`, `ceil()` 进行取整操作。
 
@@ -50,4 +51,4 @@
 
 ## 参考
 
-[^1]: [为什么(2.55).toFixed(1)等于2.5？](https://www.cnblogs.com/zhangycun/p/7880580.html)
+[为什么(2.55).toFixed(1)等于2.5？](https://www.cnblogs.com/zhangycun/p/7880580.html)
