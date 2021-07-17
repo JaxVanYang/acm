@@ -2,7 +2,7 @@
  * @Descripttion: 最优贸易 解法一
  *  解法一：tarjan求强连通分量 + 缩点 + 拓扑序dp
  *  解法二：两遍spfa，正图反图各一遍，dp思想在有环图上的最短路做法
- *  解法三：分层图最短路上跑spfa求最长路
+ *  解法三：最短路上跑spfa求最长路
  * @Topic link: https://www.acwing.com/problem/content/description/343/
  * @Question meaning: 
  * @Status: Accepted
