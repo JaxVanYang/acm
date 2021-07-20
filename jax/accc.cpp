@@ -5,7 +5,7 @@
  * @Status: 
  * @Author: cyj
  * @Date: 2021-07-19 13:32:38
- * @LastEditTime: 2021-07-19 13:32:39
+ * @LastEditTime: 2021-07-19 14:17:58
  */
 
 #include <iostream>
@@ -20,7 +20,7 @@ typedef pair<int, int> PII;
 #define y second
 
 int n, a[N], tr[N], k;
-int ans[N], y[N];
+int ans[N], u[N];
 bool st[N], st1[N], s[N];
 PII p[N];
 
@@ -48,7 +48,7 @@ int main(){
     for (int i = 1; i <= k; i ++){
 //         cin >> p[i].x >> p[i].y;
         scanf("%d%d", &p[i].x, &p[i].y);
-        st[p[i].x] = 1, y[p[i].x] = p[i].y;
+        st[p[i].x] = 1, u[p[i].x] = p[i].y;
     }
     for (int i = 1; i <= n; i ++) add(i);
     int maxv = n;
@@ -69,7 +69,7 @@ int main(){
             int l = 1, r = n;
             while (l < r){
                 int mid = l + r >> 1;
-                if (sum(mid) >= y[i]) r = mid;
+                if (sum(mid) >= u[i]) r = mid;
                 else l = mid + 1;
             }
             ans[i] = l;
@@ -84,7 +84,7 @@ int main(){
             flag = 0;
             break;
         }
-        else s[ans[i]] =1;
+        else s[ans[i]] = 1;
     }
     if (flag){
 //         for (int i = 1; i <= n; i ++) cout << ans[i] << ' ';

@@ -1,11 +1,12 @@
 /*
- * @Descripttion: 
- * @Topic link: 
+ * @Descripttion: 求割点以及删除割点后的最多连通块数量
+ 求一个图删除一个点之后，联通块最多有多少。
+ * @Topic link: https://ac.nowcoder.com/acm/contest/963/F
  * @Question meaning: 
- * @Status: 
+ * @Status: Accepted
  * @Author: cyj
  * @Date: 2021-07-19 19:58:44
- * @LastEditTime: 2021-07-19 19:58:45
+ * @LastEditTime: 2021-07-19 20:01:09
  */
 
 #include <cstdio>
