@@ -17,3 +17,15 @@
 | 题目 | 难度 | 相关标签 |
 |:---:|:---:|:---:|
 | [acw-119 袭击](https://www.acwing.com/problem/content/description/121/) | 中等 | 最近点对 |
+
+### 二分
+
+| 题目 | 难度 | 相关标签 |
+|:---:|:---:|:---:|
+| [acw-120 防线](https://www.acwing.com/problem/content/122/) | 中等 | - |
+
+## 2. 基本数据结构
+
+| 题目 | 难度 | 相关标签 |
+|:---:|:---:|:---:|
+| [Maximal submatrix](http://acm.hdu.edu.cn/contests/contest_showproblem.php?cid=984&pid=1008) | 中等 | 单调栈 |
