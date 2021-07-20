@@ -29,3 +29,4 @@
 | 题目 | 难度 | 相关标签 |
 |:---:|:---:|:---:|
 | [Maximal submatrix](http://acm.hdu.edu.cn/contests/contest_showproblem.php?cid=984&pid=1008) | 中等 | 单调栈 |
+| [acw-142 前缀统计](https://www.acwing.com/problem/content/144/) | 简单 | Trie |
