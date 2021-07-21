@@ -34,3 +34,4 @@
 | [acw-144 最长异或路径](https://www.acwing.com/problem/content/description/146/) | 中等 | Trie、树上差分、DFS |
 | [acw-143 最大异或和](https://www.acwing.com/problem/content/description/145/) | 简单 | Trie |
 | [acw-136 邻值查找](https://www.acwing.com/problem/content/138/) | 中等 | 链表、平衡树 |
+| [hdu-6955 Xor sum](https://vjudge.net/problem/HDU-6955) | 中等 | Trie、DFS |

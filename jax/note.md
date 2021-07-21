@@ -118,7 +118,31 @@
 
     `scanf("%c", &ch)` 和 `getchar()` 都不会忽略空白字符，使用 `cin >> ch` 可以忽略空白字符。
 
-### 3.2 杂项
+### 3.2 优化
+
+1. `memset()` 太慢
+
+    对于部分时间要求严格的题目，使用 `memset()` 可能会 TLE，可以在重置的时候只重置必要的部分，比如 `Trie` 的重置：
+
+    ```cpp
+    void insert(int num) {
+        /* ... */
+            if (trie[p][val] == 0) {
+                trie[p][val] = ++tot;
+                // 因为字典树可能只被部分重置，所以需要在扩展新结点的时候动态重置
+                trie[tot][0] = trie[tot][1] = 0;
+                end[tot] = 0;
+            }
+        /* ... */
+    }
+    void reset() {
+        trie[1][0] = trie[1][1] = 0;
+        end[1] = 0;
+        tot = 1;
+    }
+    ```
+
+### 3.3 杂项
 
 1. `long double` 在十进制下的**有效数字**有 18～19位，刚好和 `long long` 差不多。
 
