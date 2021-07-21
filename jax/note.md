@@ -21,7 +21,7 @@
 
 | 常量名 | 常量值 | 备注 |
 | --- | --- | --- |
-| INT32_MAX | 2^31 - 1 = 2147483647 > 2e9 | 属于 `<stdint.h>` 库 |
+| INT32_MAX | 2^31 - 1 = 2147483647 = 0x7fffffff > 2e9 | 属于 `<stdint.h>` 库 |
 | INT64_MAX | 2^63 - 1 = 9223372036854775807 > 9e18 | 同上 |
 | UINT32_MAX | 2^32 - 1 = 4294967295 > 4e9 | 同上 |
 
@@ -30,6 +30,9 @@
 | 函数 | 描述 | 备注 |
 | --- | --- | --- |
 | to_string | 将一个数值转换成字符串 | 属于 `<string>` 库 |
+| stoi | 将一个字符串解析成 int | 属于 `<string>` 库 |
+| stol | 将一个字符串解析成 long int | 属于 `<string>` 库 |
+| stod | 将一个字符串解析成 double | 属于 `<string>` 库 |
 
 ### 1.3 STL
 
@@ -73,6 +76,23 @@
     这里利用到了一个数学技巧：2 的 0 到 35 次方对 37 取模的结果刚好取遍 1 到 36，所以可以将 2 的 0 到 35 次方映射到长度为 37 的数组上。
 
 4. 存储树时使用双向边代替单向边，即可将树扩展成图，并且可以从任意一点遍历所有结点，对于某些没有给出根结点的题目有帮助，例如：[acw-144 最长异或路径](https://www.acwing.com/problem/content/description/146/)。
+
+5. 读入一整行的几种方法
+
+    1. `gets()` 读入 `char[]`:
+        ```cpp
+        char s[1024];
+        gets(s);
+        ```
+
+    2. `getline()` 读入 `string` 或 `char[]`:
+        ```cpp
+        std::string s1;
+        getline(std::cin, s1);
+
+        char s2[1024];
+        std::cin.getline(s2, 1024);
+        ```
 
 ## 3. 细节
 
@@ -153,3 +173,5 @@
 ## 参考
 
 [为什么(2.55).toFixed(1)等于2.5？](https://www.cnblogs.com/zhangycun/p/7880580.html)
+
+[C/C++如何整行读入字符串？](https://www.cnblogs.com/AlvinZH/p/6798023.html)
