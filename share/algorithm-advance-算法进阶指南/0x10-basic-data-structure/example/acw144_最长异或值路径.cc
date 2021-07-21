@@ -53,7 +53,7 @@ int main() {
     for (int i = 1; i < n; ++i) {
         int u, v, w;
         scanf("%d%d%d", &u, &v, &w);
-        // 加入双边，将树扩展为图
+        // Trick: 加入双边，将树扩展为图，即可通过任意一点遍历所有结点
         add(u, v, w);
         add(v, u, w);
     }
