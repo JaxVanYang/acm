@@ -43,10 +43,18 @@ ostream &operator<<(ostream &out, vector<T> &v) {
     return out;
 }
 
+void solve() {
+
+}
+
 int main() {
     startTime = clock();
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }    
 }

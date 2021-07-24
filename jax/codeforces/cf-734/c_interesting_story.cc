@@ -1,6 +1,3 @@
-// Verbose template for CP
-// You can create a snippet for this in VS Code
-
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -43,10 +40,38 @@ ostream &operator<<(ostream &out, vector<T> &v) {
     return out;
 }
 
+void solve() {
+    int n;
+    cin >> n;
+    vector<string> v(n);
+    cin >> v;
+    auto calc = [&](char c) {
+        vi cnts(n);
+        REP(i, 0, n) {
+            int cnt = 0;
+            for (auto &ch : v[i]) {
+                if (ch == c) ++cnt;
+            }
+            cnts[i] = cnt * 2 - v[i].size();
+        }
+        sort(cnts.begin(), cnts.end(), greater<>());
+        // cout << cnts << el;
+        int i = 0;
+        for (int cnt = 0; i < n && cnt + cnts[i] > 0; ++i) cnt += cnts[i];
+        return i;
+    };
+
+    cout << max({calc('a'), calc('b'), calc('c'), calc('d'), calc('e')}) << el;
+}
+
 int main() {
     startTime = clock();
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
 }
