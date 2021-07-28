@@ -1,6 +1,3 @@
-// Verbose template for CP
-// You can create a snippet for this in VS Code
-
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -28,14 +25,42 @@ double getCurTime() {
   return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
 
-template<typename T> istream &operator>>(istream &in, vector<T> &v) { for (auto &each : v) in >> each; return in; }
-template<typename T> ostream &operator<<(ostream &out, vector<T> &v) { for (auto &each : v) out << each << ' '; return out; }
-template<typename T, typename U> ostream &operator<<(ostream &out, pair<T, U> p) { return out << p.F << ' ' << p.S; }
+template<typename T>
+void print(T &v) {
+    for (auto val : v) cout << val << ' ';
+    cout << el;
+}
+template<typename T>
+istream &operator>>(istream &in, vector<T> &v) {
+    for (auto &each : v) in >> each;
+    return in;
+}
+template<typename T>
+ostream &operator<<(ostream &out, vector<T> &v) {
+    for (auto &each : v) out << each << ' ';
+    return out;
+}
 
 int main() {
     startTime = clock();
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    
+    int n;
+    cin >> n;
+    vi v(n);
+    cin >> v;
+
+    int ans = 0;
+    Heap<int> heap;
+    for (auto it : v) heap.push(it);
+    while (heap.size() > 1) {
+        int sum = heap.top();
+        heap.pop();
+        sum += heap.top();
+        heap.pop();
+        ans += sum;
+        heap.push(sum);
+    }
+    cout << ans << el;
 }

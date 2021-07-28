@@ -1,4 +1,4 @@
-// Verbose template for CP
+// Verbose CP template for mutiple test cases
 // You can create a snippet for this in VS Code
 
 #include <bits/stdc++.h>
@@ -7,6 +7,7 @@ using ll = long long;
 using ull = unsigned long long;
 using vi = vector<int>;
 using pi = pair<int, int>;
+template<typename T> using Heap = priority_queue<T, vector<T>, greater<T>>;
 
 #define REP(i, l, r) for (int i = l; i < r; ++i)
 #define F first
@@ -27,21 +28,9 @@ double getCurTime() {
   return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
 
-template<typename T>
-void print(T &v) {
-    for (auto val : v) cout << val << ' ';
-    cout << el;
-}
-template<typename T>
-istream &operator>>(istream &in, vector<T> &v) {
-    for (auto &each : v) in >> each;
-    return in;
-}
-template<typename T>
-ostream &operator<<(ostream &out, vector<T> &v) {
-    for (auto &each : v) out << each << ' ';
-    return out;
-}
+template<typename T> istream &operator>>(istream &in, vector<T> &v) { for (auto &each : v) in >> each; return in; }
+template<typename T> ostream &operator<<(ostream &out, vector<T> &v) { for (auto &each : v) out << each << ' '; return out; }
+template<typename T, typename U> ostream &operator<<(ostream &out, pair<T, U> p) { return out << p.F << ' ' << p.S; }
 
 void solve() {
 
