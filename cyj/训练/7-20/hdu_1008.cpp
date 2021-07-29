@@ -5,7 +5,7 @@
  * @Status: 
  * @Author: cyj
  * @Date: 2021-07-20 14:07:37
- * @LastEditTime: 2021-07-20 14:49:29
+ * @LastEditTime: 2021-07-20 21:14:13
  */
 
 #include <iostream>
@@ -46,7 +46,7 @@ int main()
         for (int i = 1; i <= n; i ++){
             for (int j = 1; j <= m; j ++){
                 if (t[i][j]) row[j] += 1;
-                else row[j] = 0;
+                else row[j] = 1;
             }
             tt = row[m + 1] = 0;
             for (int i = 1; i <= m + 1; i ++){
@@ -69,3 +69,19 @@ int main()
     }
     return 0;
 }
+
+// for (int i = 0 ;i < n; i++){
+//     if (!tt || s[tt] < row[i]){
+//         s[++ tt] = row[i];
+//         w[tt] = 1;
+//     }
+//     else {
+//         int width = 0;
+//         while (tt && s[tt] >= row[i]){
+//             width += w[tt];
+//             ans = max(ans, widtth * s[tt --]);
+//         }
+//         s[++ tt] = row[i];
+//         w[tt] = 1 + width;
+//     }
+// }
