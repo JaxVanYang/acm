@@ -1,6 +1,3 @@
-// Verbose CP template for mutiple test cases
-// You can create a snippet for this in VS Code
-
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -22,19 +19,22 @@ template<typename T> using Heap = priority_queue<T, vector<T>, greater<T>>;
 #define Reverse(v) reverse(v.begin(), v.end())
 
 const char el = '\n';
-const int N = 1e6 + 10;
+const int N = 2e5 + 10;
 clock_t startTime;
 double getCurTime() {
   return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
 
 template<typename T> istream &operator>>(istream &in, vector<T> &v) { for (auto &each : v) in >> each; return in; }
-template<typename T, typename U> istream &operator>>(istream &in, pair<T, U> &p) { return in >> p.F >> p.S; }
 template<typename T> ostream &operator<<(ostream &out, vector<T> &v) { for (auto &each : v) out << each << ' '; return out; }
 template<typename T, typename U> ostream &operator<<(ostream &out, pair<T, U> p) { return out << p.F << ' ' << p.S; }
 
-void solve() {
-
+int above[N];
+int ans;
+inline void add(int u, int v) {
+    if (u < v) swap(u, v);
+    if (above[v] == 0) --ans;
+    ++above[v];
 }
 
 int main() {
@@ -42,9 +42,31 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int t;
-    cin >> t;
-    while (t--) {
-        solve();
-    }    
+    int n, m;
+    cin >> n >> m;
+    ans = n;
+    REP(i, 0, m) {
+        int u, v;
+        cin >> u >> v;
+        add(u, v);
+    }
+    int q;
+    cin >> q;
+    while (q--) {
+        int sel;
+        cin >> sel;
+        if (sel == 1) {
+            int u, v;
+            cin >> u >> v;
+            add(u, v);
+        } else if (sel == 2) {
+            int u, v;
+            cin >> u >> v;
+            if (u < v) swap(u, v);
+            above[v]--;
+            if (above[v] == 0) ++ans;
+        } else {
+            cout << ans << el;
+        }
+    }
 }
