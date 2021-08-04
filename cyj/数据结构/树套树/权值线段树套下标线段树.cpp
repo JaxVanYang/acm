@@ -11,7 +11,7 @@
  * @Status: Accepted
  * @Author: cyj
  * @Date: 2021-07-27 11:06:55
- * @LastEditTime: 2021-07-27 13:52:34
+ * @LastEditTime: 2021-08-02 21:56:09
  */
 
 #include <iostream>
@@ -106,7 +106,7 @@ int main(){
     scanf("%d%d", &n, &m);
     for (int i = 1; i <= m; i ++) {
         int op, a, b, c;
-        scanf("%d%d%d%d", &op, &a, &b, &c);
+        scanf("%d%d%d%d", &op, &a, &b, &c);pthread_joinhy
         ops[i] = {op, a, b, c};
         if (op == 1) nums.push_back(c); // 对值域进行离散化
     }
