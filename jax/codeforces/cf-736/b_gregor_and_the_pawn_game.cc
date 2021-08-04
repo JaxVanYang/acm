@@ -1,6 +1,3 @@
-// Verbose CP template for mutiple test cases
-// You can create a snippet for this in VS Code
-
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -29,12 +26,30 @@ double getCurTime() {
 }
 
 template<typename T> istream &operator>>(istream &in, vector<T> &v) { for (auto &each : v) in >> each; return in; }
-template<typename T, typename U> istream &operator>>(istream &in, pair<T, U> &p) { return in >> p.F >> p.S; }
 template<typename T> ostream &operator<<(ostream &out, vector<T> &v) { for (auto &each : v) out << each << ' '; return out; }
 template<typename T, typename U> ostream &operator<<(ostream &out, pair<T, U> p) { return out << p.F << ' ' << p.S; }
 
 void solve() {
-
+    int n;
+    cin >> n;
+    string s, t;
+    cin >> s >> t;
+    int ans = 0;
+    for (int i = 0; i < n; ++i) {
+        if (t[i] == '1') {
+            if (i > 0 && s[i - 1] == '1') {
+                ++ans;
+                s[i - 1] = 'x';
+            } else if (s[i] == '0') {
+                ++ans;
+                s[i] = 'x';
+            } else if (i < n - 1 && s[i + 1] == '1') {
+                ++ans;
+                s[i + 1] = 'x';
+            }
+        }
+    }
+    cout << ans << el;
 }
 
 int main() {
@@ -46,5 +61,5 @@ int main() {
     cin >> t;
     while (t--) {
         solve();
-    }    
+    }
 }

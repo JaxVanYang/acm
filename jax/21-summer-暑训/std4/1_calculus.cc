@@ -1,6 +1,3 @@
-// Verbose CP template for mutiple test cases
-// You can create a snippet for this in VS Code
-
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
@@ -29,12 +26,30 @@ double getCurTime() {
 }
 
 template<typename T> istream &operator>>(istream &in, vector<T> &v) { for (auto &each : v) in >> each; return in; }
-template<typename T, typename U> istream &operator>>(istream &in, pair<T, U> &p) { return in >> p.F >> p.S; }
 template<typename T> ostream &operator<<(ostream &out, vector<T> &v) { for (auto &each : v) out << each << ' '; return out; }
 template<typename T, typename U> ostream &operator<<(ostream &out, pair<T, U> p) { return out << p.F << ' ' << p.S; }
 
 void solve() {
-
+    string s;
+    cin >> s;
+    int l = 0, n = s.size();
+    map<string, int> mp;
+    while (l < n) {
+        int r = l;
+        while (r < n && s[r] != '+') ++r;
+        int mid = l;
+        while (mid < r && isdigit(s[mid])) ++mid;
+        // cout << s.substr(l, mid - l) << ' ' << s.substr(mid, r - mid) << el;
+        mp[s.substr(mid, r - mid)] += stoi(s.substr(l, mid - l));
+        l = r + 1;  // Note: offset from '+'
+    }
+    for (auto &it : mp) {
+        if (it.S != 0) {
+            cout << "NO" << el;
+            return;
+        }
+    }
+    cout << "YES" << el;
 }
 
 int main() {
@@ -46,5 +61,5 @@ int main() {
     cin >> t;
     while (t--) {
         solve();
-    }    
+    }
 }
