@@ -22,7 +22,6 @@ template<typename T> using Heap = priority_queue<T, vector<T>, greater<T>>;
 #define Reverse(v) reverse(v.begin(), v.end())
 
 const char el = '\n';
-const int N = 1e6 + 10;
 clock_t startTime;
 double getCurTime() {
   return (double)(clock() - startTime) / CLOCKS_PER_SEC;
@@ -32,6 +31,8 @@ template<typename T> istream &operator>>(istream &in, vector<T> &v) { for (auto 
 template<typename T, typename U> istream &operator>>(istream &in, pair<T, U> &p) { return in >> p.F >> p.S; }
 template<typename T> ostream &operator<<(ostream &out, vector<T> &v) { for (auto &each : v) out << each << ' '; return out; }
 template<typename T, typename U> ostream &operator<<(ostream &out, pair<T, U> p) { return out << p.F << ' ' << p.S; }
+
+const int N = 1e6 + 10;
 
 void solve() {
 
