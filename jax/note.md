@@ -142,6 +142,36 @@
 
 5. 谨慎使用指针作为 `Set` 等容器的键，因为将指针所指的空间回收后会可能会被重新分配给其他对象，导致 `Set` 之类的容器中所指的对象可能与期望的不同。
 
+6. 避免使用 `y1` 作为全局变量名，因为 `y1` 已经在 `<mathcalls.h>` 中被定义为了 Bessel 函数。除非你没有包含 `<math.h>`，因为 `<mathcalls.h>` 是 `<math.h>` 的帮助头文件，另外值得注意的一点是局部变量不受影响。
+
+7. 在结构体里重载的二元运算符无法响应常量对象的调用：
+
+    ```cpp
+    struct Node {
+        int val;
+        inline bool operator<(const Node &node) {
+            return val < node.val;
+        }
+    };
+
+    int main() {
+        const Node a{1};
+        Node b{2};
+        std::cout << a < b << std::endl;    // Compile Error
+        std::cout << b < a << std::endl;    // Compile Pass
+    }
+    ```
+
+    解决办法是将重载运算符写在结构体之外：
+
+    ```cpp
+    inline bool operator<(const Node &a, const Node &b) {
+        return a.val < b.val;
+    }
+    ```
+
+    猜测原因是只有非常量对象可以调用成员函数，更一般的解决办法是将函数声明为“常量函数”（保证不改变成员变量的函数），具体方法待考。
+
 ### 3.2 优化
 
 1. `memset()` 太慢
@@ -177,3 +207,5 @@
 [为什么(2.55).toFixed(1)等于2.5？](https://www.cnblogs.com/zhangycun/p/7880580.html)
 
 [C/C++如何整行读入字符串？](https://www.cnblogs.com/AlvinZH/p/6798023.html)
+
+[Unable to use 'y1' as a float variable in C](https://stackoverflow.com/questions/46251041/unable-to-use-y1-as-a-float-variable-in-c)
