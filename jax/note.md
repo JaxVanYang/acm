@@ -94,6 +94,12 @@
         std::cin.getline(s2, 1024);
         ```
 
+6. 读取输入错误时抛出异常而不是忽略错误，可以在读入错误时产生 `RTE` 而不是 `WA`，有利于 debug。比如向 `int` 中读入超过 `int` 范围的大整数会中止程序，而不是用满足范围内的值替代。
+
+    ```cpp
+    std::cin.exceptions(std::cin.failbit);
+    ```
+
 ## 3. 细节
 
 ### 3.1 易错
@@ -172,6 +178,8 @@
 
     猜测原因是只有非常量对象可以调用成员函数，更一般的解决办法是将函数声明为“常量函数”（保证不改变成员变量的函数），具体方法待考。
 
+8. 判断质数记得特判小于 2 的整数。
+
 ### 3.2 优化
 
 1. `memset()` 太慢
@@ -206,8 +214,10 @@
 
 ## 参考
 
-[为什么(2.55).toFixed(1)等于2.5？](https://www.cnblogs.com/zhangycun/p/7880580.html)
+- [为什么(2.55).toFixed(1)等于2.5？](https://www.cnblogs.com/zhangycun/p/7880580.html)
 
-[C/C++如何整行读入字符串？](https://www.cnblogs.com/AlvinZH/p/6798023.html)
+- [C/C++如何整行读入字符串？](https://www.cnblogs.com/AlvinZH/p/6798023.html)
 
-[Unable to use 'y1' as a float variable in C](https://stackoverflow.com/questions/46251041/unable-to-use-y1-as-a-float-variable-in-c)
+- [Unable to use 'y1' as a float variable in C](https://stackoverflow.com/questions/46251041/unable-to-use-y1-as-a-float-variable-in-c)
+
+- [What are the uses of cin.exceptions(cin.failbit) in Competitive Programming?](https://codeforces.com/blog/entry/83486)

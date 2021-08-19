@@ -22,7 +22,8 @@ void solve() {
 
 int main() {
     ios::sync_with_stdio(false);
-    cin.tie(0);
+    cin.tie(nullptr), cout.tie(nullptr);
+    cin.exceptions(cin.failbit);
 
     int t;
     cin >> t;
