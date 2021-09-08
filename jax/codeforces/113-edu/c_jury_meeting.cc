@@ -71,7 +71,7 @@ void solve() {
 
 		// ll ans = p[rem] * p[d] % mod * d % mod;
 
-		ll ans = p[rem] * p[d] % mod;
+		ll ans = (ll)p[rem] * p[d] % mod;
 
 		ans = ans * d % mod;
 		ans = ans * p[n] % mod;
