@@ -100,6 +100,12 @@
     std::cin.exceptions(std::cin.failbit);
     ```
 
+7. 负数取模：
+
+    ```cpp
+    num = (num % mod + mod) % mod;
+    ```
+
 ## 3. 细节
 
 ### 3.1 易错
