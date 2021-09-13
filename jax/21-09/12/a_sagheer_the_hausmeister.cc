@@ -58,6 +58,11 @@ int main() {
 	int l = building[last].find('1');
 	int r = building[last].rfind('1');
 
+	if (last == n - 1) {
+		cout << r << endl;
+		return 0;
+	}
+
 	cout << min(dp[last + 1][0] + r, dp[last + 1][1] + m + 1 - l) + 1 << endl;
 }
 
