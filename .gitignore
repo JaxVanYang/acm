@@ -1,8 +1,9 @@
 # Temporary file
 *.exe
 *.out
-tmp.*
 tempCodeRunnerFile.*
+*.jar
+*.class
 
 # Temporary folder
 .vscode/
