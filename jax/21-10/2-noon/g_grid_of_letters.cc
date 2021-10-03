@@ -1,58 +1,53 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1e3 + 10;
-const int LMT = N * N;
-
+const int N = 1010, M = N * N;
+const int dx[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+const int dy[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
 char grid[N][N];
 int n, m;
-vector<int> edges[LMT];
-int d[LMT];
-bool vis[LMT];
-
-int dx[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
-int dy[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
-
-inline bool valid(int x, int y) {
-    return 0 <= x && x < n && 0 <= y && y < m;
-}
+int d[M];
+bool vis[M];
+vector<int> edges[M];
 
 inline void add(int u, int v) {
     edges[u].push_back(v);
+    ++d[v];
+}
+
+inline bool valid(int x, int y) {
+    return 0 <= x && x < n && 0 <= y && y < m;
 }
 
 inline int Hash(int x, int y) {
     return x * m + y;
 }
 
-int dfs(int cur) {
-    if (vis[cur]) {
+int dfs(int u) {
+    // cout << "u = " << u << endl;
+
+    if (vis[u]) {
         return 0;
     }
 
-    // cout << "cur = " << cur << endl;
-    if (edges[cur].empty()) {
+    if (edges[u].empty()) {
         return 1;
     }
 
     int ret = 0;
 
-    for (int v : edges[cur]) {
-        if (!vis[v]) {
-            ret = max(ret, dfs(v));
-        }
+    for (int v : edges[u]) {
+        ret = max(ret, dfs(v));
     }
 
-    vis[cur] = true;
+    vis[u] = true;
 
     return ret + 1;
 }
 
 int main() {
     scanf("%d%d", &n, &m);
-
+    
     for (int i = 0; i < n; ++i) {
         scanf("%s", grid[i]);
     }
@@ -60,37 +55,37 @@ int main() {
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             int u = Hash(i, j);
+
             for (int k = 0; k < 8; ++k) {
                 int x = i + dx[k], y = j + dy[k];
 
                 if (valid(x, y) && grid[x][y] == grid[i][j] + 1) {
-                    int v = Hash(x, y);
-
-                    // cout << grid[i][j] << " -> " << grid[x][y] << endl;
-                    // cout << u << " -> " << v << endl;
-                    add(u, v);
-                    ++d[v];
+                    add(u, Hash(x, y));
                 }
             }
         }
     }
 
-    // vector<int> begins;
-    vector<pair<char, int>> begins;
-
-    for (int i = 0; i < n * m; ++i) {
-        if (d[i] == 0) {
-            begins.push_back({grid[i / m][i % m], i});
-        }
-    }
-
-    sort(begins.begin(), begins.end());
+    vector<pair<char, int>> us;
 
     int ans = 0;
 
-    for (auto [ch, begin] : begins) {
-        // cout << "begin = " << begin << endl;
-        ans = max(ans, dfs(begin));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            int u = Hash(i, j);
+
+            if (d[u] == 0) {
+                us.push_back({grid[i][j], u});
+            }
+        }
+    }
+
+    sort(us.begin(), us.end());
+
+    for (auto [ch, u] : us) {
+        // cout << "ch = " << ch << " u = " << u << endl;
+
+        ans = max(ans, dfs(u));
 
         if (ans == 26) {
             break;
