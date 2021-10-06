@@ -1,27 +1,54 @@
 #include <iostream>
-#include <algorithm>
-using namespace std;
+#include <cctype>
+
+template<typename T>
+void read(T &x) {
+    x = 0;
+
+    int k = 1;
+
+    char ch = getchar();
+
+    if (ch == '-') {
+        k = -1;
+        ch = getchar();
+    }
+
+    while (isdigit(ch)) {
+        x = x * 10 + ch - '0';
+        ch = getchar();
+    }
+
+    x *= k;
+}
+
+template<typename T>
+T gcd(T a, T b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+
+const int N = 6;
 
 int main() {
-    int a[6], b[6];
+    int a[N], b[N];
 
-    for (int i = 0; i < 6; ++i) {
-        scanf("%d", a + i);
+    for (int i = 0; i < N; ++i) {
+        read(a[i]);
     }
 
-    for (int i = 0; i < 6; ++i) {
-        scanf("%d", b + i);
+    for (int i = 0; i < N; ++i) {
+        read(b[i]);
     }
 
-    int cnt = 0;
-    for (int i = 0; i < 6; ++i) {
-        for (int j = 0; j < 6; ++j) {
+    int c = 0;
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
             if (a[i] > b[j]) {
-                ++cnt;
+                ++c;
             }
         }
     }
 
-    int g = __gcd(cnt, 36);
-    printf("%d/%d\n", cnt / g, 36 / g);
+    int g = gcd(c, 36);
+    printf("%d/%d\n", c / g, 36 / g);
 }

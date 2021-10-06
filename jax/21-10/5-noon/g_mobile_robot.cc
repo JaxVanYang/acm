@@ -1,62 +1,50 @@
 #include <bits/stdc++.h>
-
-#define ll long long
-#define INF 0x3f3f3f3f
-template<typename T>inline void read(T &x)
-{
-    x=0;char c=getchar();ll f=1;
-    if(c>'9'||c<'0')
-    {
-        if(c=='-')f=-1;
-        c=getchar();
-    }
-    while(c<='9'&&c>='0')
-    {
-        x=(x<<1)+(x<<3)+c-'0';
-        c=getchar();
-    }
-    x*=f;
-}
-template<typename T> inline void write(T x)
-{
-
-    if(x<0)putchar('-'),x=-x;
-    if(x>9)write(x/10);
-    putchar(x%10+'0');
-}
 using namespace std;
-int n;
-ll d;
-ll a[1000010];
-int main()
-{
-    //ios::sync_with_stdio(0);
-    //cin.tie(0);cout.tie(0);
-    read(n);read(d);
-    long double minn=1e16,maxn=-1e16;
-    for(int i=1;i<=n;i++)read(a[i]),minn=min(minn,(long double)a[i]),maxn=max(maxn,(long double)a[i]);
-    long double mid=(minn+maxn)/2.0,s;
-    if(n&1)s=mid-d*(n/2);
-    else s=mid-d/2.0-d*(n/2-1);
-    long double m1=0,m2=0;
-    for(int i=1;i<=n;i++)
-    {
-        if(a[i]>s)m1=max(m1,a[i]-s);
-        else m2=max(m2,s-a[i]);
-        s=s+d;
+using ll = long long;
+
+const int N = 1e6 + 10;
+const ll inf = INT64_MAX / 4;
+
+template<typename T>
+void read(T &t) {
+    t = 0; int k = 1;
+    char ch = getchar();
+    if (ch == '-') {
+        k = -1;
+        ch = getchar();
     }
-    if(n&1)s=mid-d*(n/2);
-    else s=mid-d/2.0-d*(n/2-1);
-    long double ans=(m1+m2)/2.0;
-    m1=0,m2=0;
-    for(int i=n;i>=1;i--)
-    {
-        if(a[i]>s)m1=max(m1,a[i]-s);
-        else m2=max(m2,s-a[i]);
-        s=s+d;
+    while (isdigit(ch)) {
+        t = t * 10 + ch - '0';
+        ch = getchar();
     }
-    long double x=(m1+m2)/2.0;
-    ans=min(ans,x);
-    printf("%.1Lf\n",ans);
-    return 0;
+    t *= k;
+}
+template<typename T, typename ...Args>
+void read(T &t, Args &...args) {
+    read(t), read(args...);
+}
+
+int main() {
+    int n;
+    ll d;
+    read(n, d);
+    // cout << "n = " << n << " d = " << d << endl;
+
+    ll min1 = inf, max1 = -inf, min2 = min1, max2 = max1;
+    for (int i = 0; i < n; ++i) {
+        ll x;
+        read(x);
+        ll val1 = x - i * d, val2 = x - (n - i) * d;
+        // cout << "val1 = " << val1 << " val2 = " << val2 << endl;
+        min1 = min(min1, val1), max1 = max(max1, val1);
+        // cout << "min1 = " << min1 << " max1 = " << max1 << endl;
+        min2 = min(min2, val2), max2 = max(max2, val2);
+    }
+
+    ll ans = min(max1 - min1, max2 - min2);
+    if (ans & 1) {
+        printf("%lld.5\n", ans / 2);
+    } else {
+        printf("%lld.0\n", ans / 2);
+    }
 }

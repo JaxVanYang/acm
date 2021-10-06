@@ -1,17 +1,61 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 const int N = 1e5 + 10, M = 2 * N;
-int head[N], ver[M], nex[M], edge[M], tot = 0;
+int head[N], ver[M], nex[M], tot = 0;
 bool mark[N], vis[N];
 
-void add(int u, int v, int w) {
-    ver[++tot] = v, edge[tot] = w;
+inline void add(int u, int v) {
+    ver[++tot] = v;
     nex[tot] = head[u], head[u] = tot;
+}
+
+template<typename T>
+void read(T &x) {
+    x = 0;
+    int k = 1;
+
+    char ch = getchar();
+    if (ch == '-') {
+        k = -1;
+        ch = getchar();
+    }
+
+    while (isdigit(ch)) {
+        x = x * 10 + ch - '0';
+        ch = getchar();
+    }
+
+    x *= k;
+}
+
+template<typename T, typename... Args>
+void read(T &x, Args &...args) {
+    read(x);
+    read(args...);
+}
+
+template<typename T>
+void write(T x) {
+    if (x < 0) {
+        putchar('-');
+        x = -x;
+    }
+
+    if (x > 9) {
+        write(x / 10);
+    }
+
+    putchar(x % 10 + '0');
+}
+
+inline void nl() {
+    putchar('\n');
 }
 
 bool dfs(int u, int pre) {
     bool ret = false;
+
     for (int i = head[u]; i; i = nex[i]) {
         int v = ver[i];
 
@@ -25,8 +69,6 @@ bool dfs(int u, int pre) {
     }
 
     vis[u] = true;
-    // cout << "u = " << u << endl;
-
     return false;
 }
 
@@ -38,13 +80,8 @@ int calc(int u) {
     vis[u] = true;
 
     int ret = 1;
-
     for (int i = head[u]; i; i = nex[i]) {
-        int v = ver[i];
-
-        if (!vis[v]) {
-            ret += calc(v);
-        }
+        ret += calc(ver[i]);
     }
 
     return ret;
@@ -52,26 +89,27 @@ int calc(int u) {
 
 int main() {
     int n, k;
-    scanf("%d%d", &n, &k);
+    read(n, k);
 
     for (int i = 1; i < n; ++i) {
         int u, v, w;
-        scanf("%d%d%d", &u, &v, &w);
+        read(u, v, w);
 
-        add(u, v, w);
-        add(v, u, w);
+        add(u, v);
+        add(v, u);
     }
 
-    int num;
+    int t;
     for (int i = 0; i < k; ++i) {
-        scanf("%d", &num);
-
-        mark[num] = true;
+        read(t);
+        mark[t] = true;
     }
 
-    dfs(num, 0);
+    dfs(t, 0);
 
-    int ans = calc(num);
+    int ans = calc(t);
 
-    printf("%d\n", ans);
+    
+    write(ans);
+    nl();
 }
