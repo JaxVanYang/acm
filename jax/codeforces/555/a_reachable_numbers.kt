@@ -1,7 +1,7 @@
 private fun readLn() = readLine()!!
 private fun readInt() = readLn().toInt()
 
-fun removeZeroes(x: Int): Int =
+tailrec fun removeZeroes(x: Int): Int =
 	if (x % 10 == 0) removeZeroes(x / 10) else x
 
 fun f(x: Int) = removeZeroes(x + 1)
