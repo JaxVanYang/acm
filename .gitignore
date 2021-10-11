@@ -5,6 +5,10 @@ tempCodeRunnerFile.*
 *.jar
 *.class
 
+# Input & output file
+input.txt
+output.txt
+
 # Temporary folder
 .vscode/
 test/
