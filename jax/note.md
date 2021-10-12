@@ -44,6 +44,34 @@
     
     如果要使用小根堆可以使用 `priority_queue<type, vector<type>, greater<type>>`。
 
+2. `prev()` 和 `next()` 函数
+
+    这两个函数都可以用来获取与指定迭代器 n（n 可以为负数，默认为 1）各元素的迭代器，使用这两个函数可以避免多次使用自加（`++`）、自减（`--`）来迭代。
+
+    `prev` 的愿意是上一个，所以返回的是距指定迭代器前 n 个位置的迭代器，原型如下：
+
+    ```cpp
+    template <class BidirectionalIterator>
+    BidirectionalIterator prev (BidirectionalIterator it, typename iterator_traits<BidirectionalIterator>::difference_type n = 1);
+    ```
+
+    使用举例，移除 set 中最后面的元素：
+
+    ```cpp
+    set<int> st;
+
+    if (st.size()) {
+        // 因为 erase() 方法不能直接用于反向迭代器上，所以我们需要获取 end() 的前一个迭代器，就可以用到 prev() 函数
+        // st.erase(st.rbegin());
+        st.erase(prev(st.end()));
+
+        // 也可以使用自减操作符
+        st.erase(--st.end());
+    }
+    ```
+
+    `prev()` 函数更强大的功能是返回相距 n 个位置的迭代器，`next()` 的使用方式和 `prev()` 相反，不再赘述。
+
 ## 2. 技巧
 
 1. 读取多组输入：
@@ -227,3 +255,7 @@
 - [Unable to use 'y1' as a float variable in C](https://stackoverflow.com/questions/46251041/unable-to-use-y1-as-a-float-variable-in-c)
 
 - [What are the uses of cin.exceptions(cin.failbit) in Competitive Programming?](https://codeforces.com/blog/entry/83486)
+
+- [C++ STL prev()和next()函数用法详解](http://c.biancheng.net/view/7384.html)
+
+- [如何在遍历中使用 iterator/reverse_iterator 删除元素](https://www.cnblogs.com/kesalin/p/cpp_stl.html)
