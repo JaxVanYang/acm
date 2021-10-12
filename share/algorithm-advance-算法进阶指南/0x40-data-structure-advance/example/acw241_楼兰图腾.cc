@@ -1,28 +1,32 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 using ll = long long;
 
 const int N = 2e5 + 10;
-int n, y[N], c[N], lft[2][N], rht[2][N];
+int l[2][N], r[2][N], a[N];
+int arr[N];
+int n;
 
-inline int lowbit(int x) {
-    return x & -x;
+inline int lowbit(int n) {
+    return n & -n;
 }
 
-void add(int x, int y = 1) {
-    for (; x <= n; x += lowbit(x)) {
-        c[x] += y;
+void add(int x) {
+    while (x <= n) {
+        ++arr[x];
+        x += lowbit(x);
     }
 }
 
 int ask(int x) {
-    int ret = 0;
+    int ans = 0;
+
     while (x) {
-        int low = lowbit(x);
-        ret += c[x];
-        x -= low;
+        ans += arr[x];
+        x -= lowbit(x);
     }
-    return ret;
+
+    return ans;
 }
 
 inline int ask(int l, int r) {
@@ -30,38 +34,34 @@ inline int ask(int l, int r) {
 }
 
 int main() {
-    cin >> n;
+    scanf("%d", &n);
 
     for (int i = 1; i <= n; ++i) {
-        cin >> y[i];
+        scanf("%d", a + i);
     }
 
     for (int i = 1; i <= n; ++i) {
-        lft[0][i] = ask(1, y[i]);
-        lft[1][i] = ask(y[i], n);
+        l[0][i] = ask(a[i]);
+        l[1][i] = ask(a[i], n);
 
-        // cout << "l[" << i << "] = " << lft[0][i] << " " << lft[1][i] << endl;
-
-        add(y[i]);
+        add(a[i]);
     }
 
-    fill(c + 1, c + n + 1, 0);
-    // memset(c, 0, sizeof c);
+    fill(arr + 1, arr + n + 1, 0);
 
     for (int i = n; i >= 1; --i) {
-        rht[0][i] = ask(1, y[i]);
-        rht[1][i] = ask(y[i], n);
-        add(y[i]);
+        r[0][i] = ask(a[i]);
+        r[1][i] = ask(a[i], n);
+
+        add(a[i]);
     }
 
-    ll cnt[2] = {0, 0};
+    ll ans[2] = {};
 
     for (int i = 1; i <= n; ++i) {
-        cnt[0] += (ll)lft[1][i] * rht[1][i];
-        cnt[1] += (ll)lft[0][i] * rht[0][i];
-
-        // cout << "cnt[0] = " << cnt[0] << " cnt[1] = " << cnt[1] << endl;
+        ans[0] += (ll)l[1][i] * r[1][i];
+        ans[1] += (ll)l[0][i] * r[0][i];
     }
 
-    cout << cnt[0] << ' ' << cnt[1] << endl;
+    printf("%lld %lld\n", ans[0], ans[1]);
 }
