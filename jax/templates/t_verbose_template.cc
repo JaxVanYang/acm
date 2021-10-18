@@ -1,5 +1,5 @@
 // Verbose CP template for mutiple test cases
-// You can create a snippet for this in VS Code
+// You can create a code snippet for this in VS Code
 
 #include <bits/stdc++.h>
 using namespace std;
