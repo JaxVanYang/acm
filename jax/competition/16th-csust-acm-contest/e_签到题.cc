@@ -15,7 +15,7 @@ template <typename T, typename ...Args> void read(T &t, Args &...args) { read(t)
 const int N = 2e5 + 10, M = 60;
 int n, m;
 int a[N];
-bitset<M> is_p;
+bitset<M> is_p, mask;
 
 struct Seg {
     int l, r;
@@ -38,13 +38,8 @@ void build(int p, int l, int r) {
 }
 
 void change(bitset<M> &mark, int val) {
-    bitset<M> res;
-    for (int i = 0; i < M; ++i) {
-        if (mark[i]) {
-            res[(i + val) % m] = true;
-        }
-    }
-    mark = res;
+    mark = (mark << val) | (mark >> (m - val));
+    mark &= mask;
 }
 
 void spread(int p) {
@@ -96,6 +91,7 @@ void init() {
             }
         }
     }
+    for (int i = 0; i < m; ++i) mask[i] = true;
 }
 
 void solve() {
