@@ -5,7 +5,7 @@
  * @Status: 
  * @Author: cyj
  * @Date: 2021-10-14 00:05:39
- * @LastEditTime: 2021-10-14 00:42:14
+ * @LastEditTime: 2021-10-14 21:36:24
  */
 
 #include <iostream>
@@ -17,6 +17,11 @@ using namespace std;
 const int N = 110;
 int a[N];
 set<int> s;
+
+int gcd(int a, int b){
+    return b ? a : gcd(b, a % b);
+}
+
 int main(){
     int T;
     cin >> T;
@@ -35,18 +40,8 @@ int main(){
         }
         int ans = 0;
         for (int i = 1; i <= n; i ++){
-            bool f = 1;
-            int del = a[i] - minv;
-            if (!del) continue;
-            for (int j = 1; j <= n; j ++){       
-                if ((a[j]-a[i]) % del){
-                    f = 0;
-                    break;
-                }
-            }
-            if (f) ans = max(ans, del);
+            
         }
-        if (!ans) ans = 1;
         cout << ans << endl;
     }
     return 0;

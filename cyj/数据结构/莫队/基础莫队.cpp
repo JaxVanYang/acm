@@ -1,5 +1,14 @@
 /*
  * @Descripttion: 
+ * @Topic link: 
+ * @Question meaning: 
+ * @Status: 
+ * @Author: cyj
+ * @Date: 2021-07-28 15:05:20
+ * @LastEditTime: 2021-08-07 15:44:25
+ */
+/*
+ * @Descripttion: 
  HH 有一串由各种漂亮的贝壳组成的项链。
 HH 相信不同的贝壳会带来好运，所以每次散步完后，他都会随意取出一段贝壳，思考它们所表达的含义。
 HH 不断地收集新的贝壳，因此他的项链变得越来越长。
@@ -65,7 +74,7 @@ int main(){
         scanf("%d%d", &l, &r);
         q[i] = {i, l, r};
     }
-    sort(q, q + m, cmp);
+    sort(q, q + m, cmp); 
     for (int k = 0, i = 0, j = 1, res = 0; k < m; k ++){
         int id = q[k].id, l = q[k].l, r = q[k].r;
         while (i < r) add(w[ ++ i], res);

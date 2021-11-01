@@ -5,7 +5,7 @@
  * @Status: Accepted
  * @Author: cyj
  * @Date: 2021-07-24 12:46:30
- * @LastEditTime: 2021-07-24 14:30:04
+ * @LastEditTime: 2021-08-07 09:59:52
  */
 
 #include <iostream>
@@ -62,7 +62,7 @@ void merge_sort(int l, int r){
         else q[j].res += sum(q[j].t-1), j --;
     }
     
-    while (j > mid) q[j].res += sum(q[j].t-1), j --;
+    while (j > mid) q[j].res += sum(q[j].t-1 j --;
     for (int k = mid; k > i; k --) add(q[k].t, -1);
     i = l, j = mid + 1;
     int  k = 0;

@@ -5,7 +5,7 @@
  * @Status: 
  * @Author: cyj
  * @Date: 2021-10-13 23:19:49
- * @LastEditTime: 2021-10-13 23:44:32
+ * @LastEditTime: 2021-10-14 01:22:14
  */
 
 #include <iostream>
@@ -31,11 +31,13 @@ int main(){
         }
         int ans = 0;
         while (x < n){
-            int t = q.top();
-            q.pop();
-            if (x < (n - t)){
-            ans ++;
-            x += t;
+            if (q.size() > 0){
+                int t = q.top();
+                q.pop();
+                if (x < (n - t)){
+                ans ++;
+                x += t;
+                }else break;
             }else break;
         }
         cout << ans << endl;

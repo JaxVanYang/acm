@@ -5,7 +5,7 @@
  * @Status: Accepted
  * @Author: cyj
  * @Date: 2021-07-30 15:43:22
- * @LastEditTime: 2021-07-30 17:05:32
+ * @LastEditTime: 2021-08-08 11:08:15
  */
 
 #include <iostream>
@@ -26,6 +26,7 @@ typedef pair<int, int> PII;
 int f[N][32];
 int n, m, tim;
 int h[33], e[400], ne[400], idx;
+// f[i][j] 表示走了i步，当前在j点时的方案总数（在n+1处说明已自爆）
 
 void add(int a, int b){
     e[idx] = b, ne[idx] = h[a], h[a] = idx ++;
@@ -40,8 +41,8 @@ int main()
         scanf("%d%d", &a, &b);
         add(a, b), add(b, a);
     }
-    for (int i = 1; i <= n; i ++) add(i, n+1), add(i, i);
-    add(n+1, n+1);
+    for (int i = 1; i <= n; i ++) add(i, n+1), add(i, i); // n + 1 为自爆点，任何点可走向自爆点，自爆点不能返回
+    add(n+1, n+1); 
     scanf("%d", &tim);
     f[0][1] = 1;
     for (int i = 0; i <= tim; i ++){

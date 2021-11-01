@@ -10,7 +10,7 @@
  * @Status: Accepted
  * @Author: cyj
  * @Date: 2021-07-13 15:45:17
- * @LastEditTime: 2021-07-13 15:46:33
+ * @LastEditTime: 2021-09-04 14:39:49
  */
 
 #include <iostream>
@@ -44,9 +44,9 @@ void init(){
 int dp(int x){
     if (!x) return 1;
     vector<int> nums;
-    while (x) nums.push_back(x % 10), x /= 10;
+    while (x) nums.push_back(x % 10), x /= 10;  
     int res = 0, sum = 0;
-    for (int i = nums.size()-1; i >= 0; i --){
+    for (int i = nums.size()-1; i >= 0; i --){  
         int v = nums[i];
         for (int j = 0; j < v; j ++){
             res += f[i+1][j][mod(-sum, P)];

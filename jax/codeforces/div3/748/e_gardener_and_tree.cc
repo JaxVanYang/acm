@@ -1,3 +1,12 @@
+/*
+ * @Descripttion: 
+ * @Topic link: 
+ * @Question meaning: 
+ * @Status: 
+ * @Author: cyj
+ * @Date: 2021-10-14 01:09:01
+ * @LastEditTime: 2021-10-14 21:43:14
+ */
 #include <iostream>
 #include <queue>
 #include <cstring>
@@ -34,7 +43,7 @@ void solve() {
 
 		++d[u], ++d[v];
 	}
-
+	
 	queue<int> q;
 
 	for (int i = 1; i <= n; ++i) {

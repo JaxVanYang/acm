@@ -10,7 +10,7 @@
  * @Status: Accepted
  * @Author: cyj
  * @Date: 2021-07-26 14:18:54
- * @LastEditTime: 2021-07-26 22:05:55
+ * @LastEditTime: 2021-08-19 22:00:45
  */
 
 #include <iostream>
@@ -75,7 +75,7 @@ void update(int &root, int x, int y){
     int u = root;
     while (u){
         if (tr[u].v == x) break;
-        if (tr[u].v < x) u = tr[u].s[1];
+        if (tr[u].v < x) u = tr[u].s[1]; 
         else u = tr[u].s[0]; 
     }
     splay(root, u, 0);
@@ -116,11 +116,11 @@ void build(int u, int l, int r){
     build(u<<1, l, mid), build(u<<1|1, mid + 1, r);
 }
 
-void dfs(int u){
-    if (tr[u].s[0]) dfs(tr[u].s[0]);
-    if (tr[u].s[1]) dfs(tr[u].s[1]);
-    cout << tr[u].v << ' ';
-}
+// void dfs(int u){
+//     if (tr[u].s[0]) dfs(tr[u].s[0]);
+//     if (tr[u].s[1]) dfs(tr[u].s[1]);
+//     cout << tr[u].v << ' ';
+// }
 
 int get_k(int root, int k){
     int u = root, res = 0;
@@ -138,7 +138,7 @@ int query(int u, int l, int r, int x){
     if (r > mid) res += query(u<<1|1, l, r, x);
     return res;
 }
-int tim = 0;
+
 void change(int u, int pos, int x){
     update(T[u], w[pos], x);
     if (L[u] == R[u]) return;
