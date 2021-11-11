@@ -72,6 +72,22 @@
 
     `prev()` 函数更强大的功能是返回相距 n 个位置的迭代器，`next()` 的使用方式和 `prev()` 相反，不再赘述。
 
+### 1.4 运算
+
+1. C++ 运算符优先级
+
+    [![C++ operator priority](../resource/cpp_operator_priority.png)](https://zh.cppreference.com/w/cpp/language/operator_precedence)
+
+2. C++ 中的 `%`（模运算）定义如下：
+
+    $$a \% b = a - (a / b) * b$$
+
+    根据该定义可以推导出一些基于整数运算的函数结果，比如该性质保证了欧几里得算法在整数域上的结果一定是绝对值最大的公约数，即：
+
+    $$a, b \ge 0 \to gcd(a, b) = |gcd(-a, b)| = |gcd(b, -a)| = |gcd(-a, -b)|$$
+
+    所以不用担心计算 $GCD$ 时遇到负数，因为只要对结果取绝对值就能得到正确结果。
+
 ## 2. 技巧
 
 1. 读取多组输入：
@@ -271,3 +287,5 @@
 - [C++ STL prev()和next()函数用法详解](http://c.biancheng.net/view/7384.html)
 
 - [如何在遍历中使用 iterator/reverse_iterator 删除元素](https://www.cnblogs.com/kesalin/p/cpp_stl.html)
+
+- [C++ 运算符优先级](https://zh.cppreference.com/w/cpp/language/operator_precedence)
