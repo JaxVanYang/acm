@@ -103,7 +103,7 @@ directory: 33 file: 11
 
 - [cyj/](./cyj) （cyj的刷题代码）  
 
-- [jax/](./jax)（[Jax]（https://jaxvanyang.github.io) 的代码）  
+- [jax/](./jax)（[Jax](https://jaxvanyang.github.io) 的代码）  
     该目录下的文件夹以日期命名，表示存放的是哪一天的代码  
     - [21-03-21](./jax/21-03-21)  
 
@@ -217,20 +217,23 @@ Windows 到官网下载无脑下一步。
 
     很多仓库都是公开的，但不是你的仓库，你可能就没有权限去修改，在 GitHub 或 Gitee 上管理员可以授予成员权限，但 Git 为了让权限被对的人使用就必须知道尝试**推代码**的人的身份，仅仅使用之前配置过的名字和邮箱是不够的，因为这个很容易伪造。Git 的解决方法有两个：密码和密钥。因为密码访问很简单而且不方便这里就不赘述了，下面我们来简单介绍一下如何使用 `SSH 连接`。  
 
-    1. 生成 RSA 密钥对：  
+    1. 生成密钥对：  
 
         ```bash
         # 这条命令会在你的家目录下的 .ssh/ 文件夹下产生两个文件
         # 一个是自己保管的私钥，一个是等会要放到服务器上的公钥
         # 如果碰到停顿敲回车就好了
-        ssh-keygen -t rsa -C "xxxxx@xxxxx.com"
+        ssh-keygen -t ed25519 -C "your_email@example.com"
+        
+        # 如果您使用的是不支持 Ed25519 算法的旧系统，请使用以下命令：
+        ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
         ```
 
     2. 将公钥复制到 Gitee 或 GitHub 上：  
 
         这里我们以 Gitee 为例。  
 
-        1. 进入家目录下的 `.ssh/` 目录找到公钥 `id_rsa.pub`，打开并复制其中的内容。  
+        1. 进入家目录下的 `.ssh/` 目录找到公钥 `id_ed25519.pub`或 `id_rsa.pub`，打开并复制其中的内容。  
 
             ![](./resource/21-03-21-shotcut.png)
 
@@ -238,20 +241,11 @@ Windows 到官网下载无脑下一步。
 
             ![](./resource/21-03-21-id.png)
 
-        3. 现在使用 `git push` 查看是否成功：  
+        3. 现在使用 `ssh -T git@gitee.com` 查看是否成功：  
 
-            ```bash
-            git push
-            # 以下是成功信息
-            Enumerating objects: 9, done.
-            Counting objects: 100% (9/9), done.    
-            Delta compression using up to 8 threads
-            Compressing objects: 100% (6/6), done. 
-            Writing objects: 100% (6/6), 43.55 KiB | 3.11 MiB/s, done.
-            Total 6 (delta 1), reused 0 (delta 0), pack-reused 0      
-            remote: Powered by GITEE.COM [GNK-5.0]
-            To gitee.com:chu_ying_jie/acm.git    
-            58cd1c9..d61fced  master -> master
+            ```console
+            $ ssh -T git@gitee.com
+            Hi Jax Young! You've successfully authenticated, but GITEE.COM does not provide shell access
             ```
 
 ### Git 的使用技巧

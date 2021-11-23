@@ -242,6 +242,8 @@
 
 8. 判断质数记得特判小于 2 的整数。
 
+9. 使用 `std::abs()`（在 `<cmath>` 中定义）代替 `abs()`（在 `<cstdlib>` 中定义），因为 `abs()` 是 C 遗留下来的函数，只支持 `int` 类型，而 `std::abs()` 支持所有内置数字类型。
+
 ### 3.2 优化
 
 1. `memset()` 太慢
@@ -289,3 +291,5 @@
 - [如何在遍历中使用 iterator/reverse_iterator 删除元素](https://www.cnblogs.com/kesalin/p/cpp_stl.html)
 
 - [C++ 运算符优先级](https://zh.cppreference.com/w/cpp/language/operator_precedence)
+
+- <https://www.cplusplus.com/reference/cstdlib/abs/>
