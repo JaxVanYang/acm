@@ -1,0 +1,19 @@
+#include <iostream>
+
+int main() {
+    int t;
+    scanf("%d", &t);
+
+    while (t--) {
+        int n, m;
+        scanf("%d%d", &n, &m);
+
+        if (n == 1 && m == 1) {
+            puts("0");
+        } else if (n == 1 || m == 1) {
+            puts("1");
+        } else {
+            puts("2");
+        }
+    }
+}
